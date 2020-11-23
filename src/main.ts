@@ -7,5 +7,6 @@ import store from './store'
 import './styles/reset.less'
 import './styles/index.less'
 import './mock/index'
+import './utils/permission'
 
 createApp(App).use(store).use(router).use(core).mount('#app')

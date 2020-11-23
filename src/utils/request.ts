@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import { message } from 'ant-design-vue'
+import axios from 'axios'
 
 const service = axios.create({
   baseURL: '/api',
@@ -6,11 +7,23 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(
-  (config: AxiosRequestConfig): AxiosRequestConfig => {
+  config => {
     config.headers = {
       'Content-type': 'application/json'
     }
     return config
+  }
+)
+
+service.interceptors.response.use(
+  response => {
+    const res = response.data
+    if (res.code === 200) {
+      return res
+    } else {
+      message.error(res.data)
+      return new Error(res.data)
+    }
   }
 )
 

@@ -1,5 +1,6 @@
+import { ResponseBody } from '@/interface'
 import request from '@/utils/request'
 
-export const Login = (username: string, password: string) => {
+export const login = (username: string, password: string): Promise<ResponseBody> => {
   return request.post('/login', { username, password })
 }

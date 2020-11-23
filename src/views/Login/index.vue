@@ -17,7 +17,7 @@
         </a-input-password>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 14, offset: 6 }">
-        <a-button type="primary" @click="login">
+        <a-button type="primary" @click="login" :loading="loading">
           Login in
         </a-button>
       </a-form-item>
@@ -28,12 +28,17 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-import { Login } from '@/api/login'
+import { useStore } from 'vuex'
+import { useActions } from 'vuex-composition-helpers'
+import router from '@/router'
+import { notification } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'Login',
   components: { UserOutlined, LockOutlined },
   setup () {
+    const store = useStore()
+    const { Login } = useActions(store, ['Login'])
     const ruleForm = ref({
       username: 'admin',
       password: 'admin'
@@ -42,12 +47,19 @@ export default defineComponent({
       labelCol: { span: 6 },
       wrapperCol: { span: 14 }
     }
+    const loading = ref<boolean>(false)
     const login = async () => {
-      console.log(ruleForm.value.username, ruleForm.value.password)
-      const res = await Login(ruleForm.value.username, ruleForm.value.password)
-      debugger
+      try {
+        loading.value = true
+        const params = { username: ruleForm.value.username, password: ruleForm.value.password }
+        const userInfo = await Login(params)
+        notification.success({ message: `Welcome ${userInfo.name}`, description: 'Login Successful!' })
+        router.push('/dashboard')
+      } finally {
+        loading.value = false
+      }
     }
-    return { ruleForm, layout, login }
+    return { ruleForm, layout, login, loading }
   }
 })
 </script>
@@ -66,6 +78,7 @@ export default defineComponent({
   }
   .login-form {
     width: 500px;
+    margin-bottom: 140px;
   }
 }
 </style>
