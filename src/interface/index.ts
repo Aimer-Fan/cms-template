@@ -5,6 +5,9 @@ export interface ResponseBody {
 
 export interface UserState {
   name: string
-  avatar: string,
+  avatar: string
   token: string
+}
+export interface AppState {
+  device: string
 }

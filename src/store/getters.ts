@@ -1,8 +1,5 @@
-import { GetterTree } from 'vuex'
-import { UserState } from '@/interface'
-
-const getters: GetterTree<UserState, any> = {
-  token: state => state.token
+const getters = {
+  token: (state: any) => state.user.token
 }
 
 export default getters

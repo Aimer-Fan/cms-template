@@ -1,5 +1,5 @@
 import { login } from '@/api/login'
-import { StoreOptions } from 'vuex'
+import { Module } from 'vuex'
 import { UserState } from '@/interface'
 
 const state: UserState = {
@@ -8,7 +8,7 @@ const state: UserState = {
   token: ''
 }
 
-const user: StoreOptions<UserState> = {
+const user: Module<UserState, any> = {
   state: state,
 
   mutations: {

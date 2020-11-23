@@ -9,10 +9,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/enquire.js": "^2.1.2",
     "@vue/composition-api": "^1.0.0-beta.19",
     "ant-design-vue": "2.0.0-rc.1",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "enquire.js": "^2.1.6",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0",
