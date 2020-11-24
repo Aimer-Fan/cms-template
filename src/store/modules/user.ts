@@ -1,6 +1,8 @@
-import { login } from '@/api/login'
+import { login, logout } from '@/api/login'
 import { Module } from 'vuex'
 import { UserState } from '@/interface'
+import ls from '@/utils/ls'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
 
 const state: UserState = {
   name: '',
@@ -20,6 +22,7 @@ const user: Module<UserState, any> = {
     },
     SET_TOKEN: (state, token) => {
       state.token = token
+      ls.set(ACCESS_TOKEN, token)
     }
   },
 
@@ -31,6 +34,13 @@ const user: Module<UserState, any> = {
       context.commit('SET_AVATAR', userInfo.avatar)
       context.commit('SET_TOKEN', userInfo.token)
       return userInfo
+    },
+
+    async Logout (context) {
+      logout()
+      context.commit('SET_NAME', '')
+      context.commit('SET_TOKEN', '')
+      context.commit('SET_AVATAR', '')
     }
   }
 }

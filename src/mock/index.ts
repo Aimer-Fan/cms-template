@@ -15,5 +15,10 @@ const login = (option: any) => {
   }
 }
 
+const logout = (option: any) => {
+  return genResponse(200, 'logout successful')
+}
+
 Mock.setup({ timeout: '200-600' })
 Mock.mock(/\/api\/login/, 'post', login)
+Mock.mock(/\/api\/logout/, 'post', logout)

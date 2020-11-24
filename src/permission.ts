@@ -1,12 +1,19 @@
 import router from '@/router'
 import store from '@/store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const whiteList = ['/login']
 
 router.beforeEach((to, from, next) => {
   const token = store.getters.token
+  NProgress.start()
   if (token) {
-    next()
+    if (to.path === '/login') {
+      next('/')
+    } else {
+      next()
+    }
   } else {
     if (whiteList.includes(to.path)) {
       next()
@@ -14,4 +21,8 @@ router.beforeEach((to, from, next) => {
       router.replace('/login')
     }
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })

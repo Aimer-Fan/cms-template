@@ -4,7 +4,8 @@ import {
   Button,
   Icon,
   Form,
-  Input
+  Input,
+  Layout
 } from 'ant-design-vue'
 
 export default {
@@ -13,5 +14,6 @@ export default {
     app.use(Icon)
     app.use(Form)
     app.use(Input)
+    app.use(Layout)
   }
 }
