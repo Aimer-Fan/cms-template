@@ -1,14 +1,25 @@
 <template>
-  <div class="fr cms-header-icons">
-    <FullscreenExitOutlined class="mr-12" v-if="isFullScreen"  @click="fullScreen"/>
-    <FullscreenOutlined class="mr-12" v-else  @click="fullScreen"/>
-    <UserOutlined class="mr-12 cup"/>
-    <LogoutOutlined class="cup" @click="logout" />
+  <div class="fr cms-header">
+    <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
+    <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
+    <a-dropdown :trigger="['click']">
+      <img :src="avatar" alt="avatar" class="avatar mr-6">
+      <template #overlay>
+      <a-menu>
+        <a-menu-item key="0">
+          <span><UserOutlined />User Center</span>
+        </a-menu-item>
+        <a-menu-item key="1">
+          <span @click="logout"><LogoutOutlined />Logout</span>
+        </a-menu-item>
+      </a-menu>
+    </template>
+    </a-dropdown>
   </div>
 </template>
 
 <script lang="ts">
-import { createVNode, defineComponent, ref } from 'vue'
+import { createVNode, defineComponent, onBeforeUnmount, ref, onMounted, computed } from 'vue'
 import {
   LogoutOutlined,
   ExclamationCircleOutlined,
@@ -42,6 +53,35 @@ function logoutFn () {
   return { logout }
 }
 
+function fullScreenFn () {
+  const isFullScreen = ref(false)
+  const change = () => {
+    if (screenfull.isEnabled) {
+      isFullScreen.value = screenfull.isFullscreen
+    }
+  }
+  const register = () => {
+    if (screenfull.isEnabled) {
+      screenfull.on('change', change)
+    }
+  }
+  const disregister = () => {
+    if (screenfull.isEnabled) {
+      screenfull.off('change', change)
+    }
+  }
+  onMounted(register)
+  onBeforeUnmount(disregister)
+  const fullScreen = () => {
+    if (screenfull.isEnabled) {
+      screenfull.toggle()
+    } else {
+      message.warn('Sorry, your device did not support fullScreen function!')
+    }
+  }
+  return { isFullScreen, fullScreen }
+}
+
 export default defineComponent({
   name: 'GlobalHeader',
   components: {
@@ -51,22 +91,27 @@ export default defineComponent({
     FullscreenExitOutlined
   },
   setup () {
-    const isFullScreen = ref(false)
-    const fullScreen = () => {
-      if (screenfull.isEnabled) {
-        screenfull.toggle()
-        isFullScreen.value = !isFullScreen.value
-      } else {
-        message.warn('Sorry, your device did not support fullScreen function!')
-      }
-    }
-    return { ...logoutFn(), isFullScreen, fullScreen }
+    const store = useStore()
+    const avatar = computed(() => store.state.user.avatar)
+    return { ...logoutFn(), ...fullScreenFn(), avatar }
   }
 })
 </script>
 
 <style scoped lang="less">
-.cms-header-icons {
-  font-size: 18px;
+.cms-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  .icon {
+    font-size: 18px;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 51%;
+    cursor: pointer;
+  }
 }
 </style>

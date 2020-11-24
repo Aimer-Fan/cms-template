@@ -5,7 +5,9 @@ import {
   Icon,
   Form,
   Input,
-  Layout
+  Layout,
+  Dropdown,
+  Menu
 } from 'ant-design-vue'
 
 export default {
@@ -15,5 +17,7 @@ export default {
     app.use(Form)
     app.use(Input)
     app.use(Layout)
+    app.use(Dropdown)
+    app.use(Menu)
   }
 }

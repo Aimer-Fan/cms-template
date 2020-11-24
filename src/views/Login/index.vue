@@ -29,17 +29,21 @@
 import { defineComponent, ref } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
-import { useActions } from 'vuex-composition-helpers'
 import router from '@/router'
 import { notification } from 'ant-design-vue'
+
+interface LoginForm {
+  username: string;
+  password: string;
+}
 
 export default defineComponent({
   name: 'Login',
   components: { UserOutlined, LockOutlined },
   setup () {
     const store = useStore()
-    const { Login } = useActions(store, ['Login'])
-    const ruleForm = ref({
+    const Login = (params: LoginForm) => store.dispatch('Login', params)
+    const ruleForm = ref<LoginForm>({
       username: 'admin',
       password: 'admin'
     })
@@ -52,8 +56,8 @@ export default defineComponent({
       try {
         loading.value = true
         const params = { username: ruleForm.value.username, password: ruleForm.value.password }
-        const userInfo = await Login(params)
-        notification.success({ message: `Welcome ${userInfo.name}`, description: 'Login Successful!' })
+        await Login(params)
+        notification.success({ message: 'Welcome', description: 'Login Successful!' })
         router.push('/dashboard')
       } finally {
         loading.value = false

@@ -5,14 +5,19 @@ import 'nprogress/nprogress.css'
 
 const whiteList = ['/login']
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = store.getters.token
   NProgress.start()
   if (token) {
     if (to.path === '/login') {
       next('/')
     } else {
-      next()
+      if (store.getters.roles.length === 0) {
+        await store.dispatch('GetUserInfo')
+        next()
+      } else {
+        next()
+      }
     }
   } else {
     if (whiteList.includes(to.path)) {

@@ -1,4 +1,6 @@
 export const ACCESS_TOKEN = 'Access-Token'
+export const USER_NAME = 'User-Name'
+export const USER_AVATAR = 'User-Avatar'
 
 export const SIDEBAR_TYPE = 'sidebar_type'
 export const TOGGLE_MOBILE_TYPE = 'is_mobile'
@@ -13,13 +15,3 @@ export const TOGGLE_COLOR = 'color'
 export const TOGGLE_WEAK = 'weak'
 export const TOGGLE_MULTI_TAB = 'multi_tab'
 export const APP_LANGUAGE = 'app_language'
-
-export const CONTENT_WIDTH_TYPE = {
-  Fluid: 'Fluid',
-  Fixed: 'Fixed'
-}
-
-export const NAV_THEME = {
-  LIGHT: 'light',
-  DARK: 'dark'
-}

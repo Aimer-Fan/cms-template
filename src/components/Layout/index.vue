@@ -1,6 +1,8 @@
 <template>
   <a-layout>
-      <a-layout-sider theme="light"></a-layout-sider>
+      <a-layout-sider theme="light">
+        <Sider />
+      </a-layout-sider>
       <a-layout>
         <a-layout-header class="cms-global-header">
           <GlobalHeader />
@@ -15,10 +17,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import GlobalHeader from './GlobalHeader.vue'
+import Sider from './Sider.vue'
 
 export default defineComponent({
   name: 'Layout',
-  components: { GlobalHeader }
+  components: { GlobalHeader, Sider }
 })
 </script>
 

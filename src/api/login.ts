@@ -8,3 +8,7 @@ export const login = (username: string, password: string): Promise<ResponseBody>
 export const logout = (): Promise<ResponseBody> => {
   return request.post('/logout')
 }
+
+export const getUserInfo = (token: string): Promise<ResponseBody> => {
+  return request.post('/getUserInfo', { token })
+}
