@@ -24,6 +24,9 @@ const user: Module<UserState, any> = {
     SET_TOKEN: (state, token) => {
       state.token = token
       ls.set(ACCESS_TOKEN, token)
+    },
+    SET_ROLES: (state, roles) => {
+      state.roles = roles
     }
   },
 
@@ -40,6 +43,8 @@ const user: Module<UserState, any> = {
       context.commit('SET_NAME', userInfo.name)
       context.commit('SET_TOKEN', userInfo.token)
       context.commit('SET_AVATAR', userInfo.avatar)
+      context.commit('SET_ROLES', userInfo.roles)
+      return userInfo
     },
 
     async Logout (context) {

@@ -2,6 +2,7 @@ import router from '@/router'
 import store from '@/store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { RouteRecordRaw } from 'vue-router'
 
 const whiteList = ['/login']
 
@@ -12,9 +13,14 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       next('/')
     } else {
-      if (store.getters.roles.length === 0) {
-        await store.dispatch('GetUserInfo')
-        next()
+      const roles = store.getters.roles
+      if (roles.length === 0) {
+        const userInfo = await store.dispatch('GetUserInfo')
+        const roles = userInfo.roles
+        await store.dispatch('GenerateRouters', roles)
+        const routers = store.state.permission.routers
+        routers.forEach((r: RouteRecordRaw) => router.addRoute(r))
+        next({ ...to })
       } else {
         next()
       }
