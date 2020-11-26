@@ -1,6 +1,7 @@
 <template>
   <a-layout>
       <a-layout-sider theme="light">
+        <div class="cms-global-title">CMS_TEMPLATE</div>
         <Sider />
       </a-layout-sider>
       <a-layout>
@@ -26,6 +27,14 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+.cms-global-title {
+  height: 60px;
+  font-size: 18px;
+  box-shadow: 0px 1px 4px #eeeeee;
+  line-height: 60px;
+  text-align: center;
+  font-weight: 450;
+}
 .cms-global-header {
   padding: 0 30px;
   background: #ffffff;

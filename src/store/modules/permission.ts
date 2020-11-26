@@ -46,7 +46,7 @@ const permission: Module<PermissionState, any> = {
   },
   actions: {
     GenerateRouters (context, roles) {
-      console.log(roles)
+      // console.log(roles)
       // const authorizedRouters = getAuthorizedRouters(asyncRouters, roles)
       const authorizedRouters = asyncRouters
       context.commit('SET_ROUTERS', authorizedRouters)
