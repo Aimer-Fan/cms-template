@@ -10,5 +10,6 @@ export interface UserState {
   roles: Array<string>
 }
 export interface AppState {
-  device: string
+  device: string;
+  collapsed: boolean;
 }

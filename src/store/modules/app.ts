@@ -1,9 +1,13 @@
 import { Module } from 'vuex'
 import { AppState } from '@/interface'
-import { TOGGLE_DEVICE } from '../mutation-types'
+import {
+  TOGGLE_DEVICE,
+  TOGGLE_COLLAPSED
+} from '../mutation-types'
 
 const state: AppState = {
-  device: ''
+  device: 'desktop',
+  collapsed: true
 }
 
 const user: Module<AppState, any> = {
@@ -12,10 +16,16 @@ const user: Module<AppState, any> = {
   mutations: {
     [TOGGLE_DEVICE]: (state, device) => {
       state.device = device
+    },
+    [TOGGLE_COLLAPSED]: (state, collapsed) => {
+      state.collapsed = collapsed
     }
   },
 
   actions: {
+    ToggleCollapsed (context, collapsed) {
+      context.commit(TOGGLE_COLLAPSED, collapsed)
+    }
   }
 }
 

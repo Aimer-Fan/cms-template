@@ -1,4 +1,6 @@
 <template>
+  <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
+  <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
   <div class="fr cms-header">
     <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
     <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
@@ -25,7 +27,9 @@ import {
   ExclamationCircleOutlined,
   UserOutlined,
   FullscreenOutlined,
-  FullscreenExitOutlined
+  FullscreenExitOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
 } from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -45,7 +49,7 @@ function logoutFn () {
       centered: true,
       onOk: () => {
         Logout()
-        notification.success({ message: `Goodbay ${name}`, description: 'Logout Successful!' })
+        notification.success({ message: `Goodbye ${name}`, description: 'Logout Successful!' })
         router.replace('/login')
       }
     })
@@ -65,13 +69,13 @@ function fullScreenFn () {
       screenfull.on('change', change)
     }
   }
-  const disregister = () => {
+  const deregister = () => {
     if (screenfull.isEnabled) {
       screenfull.off('change', change)
     }
   }
   onMounted(register)
-  onBeforeUnmount(disregister)
+  onBeforeUnmount(deregister)
   const fullScreen = () => {
     if (screenfull.isEnabled) {
       screenfull.toggle()
@@ -88,25 +92,32 @@ export default defineComponent({
     LogoutOutlined,
     UserOutlined,
     FullscreenOutlined,
-    FullscreenExitOutlined
+    FullscreenExitOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined
   },
   setup () {
     const store = useStore()
     const avatar = computed(() => store.state.user.avatar)
-    return { ...logoutFn(), ...fullScreenFn(), avatar }
+    const toggleCollapsed = (collapsed: boolean) => {
+      console.log('ToggleCollapsed', collapsed)
+      store.dispatch('ToggleCollapsed', collapsed)
+    }
+    const collapsed = computed(() => store.state.app.collapsed)
+    return { ...logoutFn(), ...fullScreenFn(), avatar, toggleCollapsed, collapsed }
   }
 })
 </script>
 
 <style scoped lang="less">
+.icon {
+  font-size: 18px;
+}
 .cms-header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 100%;
-  .icon {
-    font-size: 18px;
-  }
   .avatar {
     width: 32px;
     height: 32px;

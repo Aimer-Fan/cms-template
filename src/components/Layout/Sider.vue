@@ -17,6 +17,13 @@ const resolvePath = (basePath: string, routePath: string): string => {
   return path.resolve(basePath, routePath)
 }
 
+function generateIcon (icon: any) {
+  if (icon) {
+    console.log(icon)
+    return icon
+  }
+}
+
 function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
   return routerList.map(router => {
     const resolved = resolvePath(basePath || '', router.path)
@@ -30,7 +37,8 @@ function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
       return (
         <Menu.Item title={router.meta?.title} key={resolvePath(basePath || '', router.path)}>
           <router-link to={resolved}>
-            {router.meta?.title}
+            { generateIcon(router.meta?.icon) }
+            <span>{router.meta?.title}</span>
           </router-link>
         </Menu.Item>
       )
@@ -40,7 +48,7 @@ function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
 
 export default defineComponent({
   name: 'Sider',
-  render () {
+  render (h: any) {
     const store = useStore()
     const routers = computed(() => store.state.permission.routers)
     const menuRouters = computed(() => routers.value[0].children)
