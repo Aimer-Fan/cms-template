@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { computed, defineComponent, ref } from 'vue'
+import { h, computed, defineComponent, ref } from 'vue'
 import path from 'path'
 import { useStore } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
@@ -19,9 +19,17 @@ const resolvePath = (basePath: string, routePath: string): string => {
 
 function generateIcon (icon: any) {
   if (icon) {
-    console.log(icon)
-    return icon
+    return h(icon)
   }
+}
+
+function generateSubMenuTitle (router: RouteRecordRaw) {
+  return (
+    <span>
+      { generateIcon(router.meta?.icon) }
+      <span>{router.meta?.title}</span>
+    </span>
+  )
 }
 
 function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
@@ -29,7 +37,7 @@ function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
     const resolved = resolvePath(basePath || '', router.path)
     if (router.children && router.children.length) {
       return (
-        <Menu.SubMenu title={router.meta?.title}>
+        <Menu.SubMenu title={generateSubMenuTitle(router)} key={resolved}>
           { generateMenu(router.children, resolved) }
         </Menu.SubMenu>
       )
@@ -46,9 +54,11 @@ function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
   })
 }
 
+// function handleOpenChange (keys: Array<string>, openKeys: Ref<Array<string>>) {
+// }
 export default defineComponent({
   name: 'Sider',
-  render (h: any) {
+  render () {
     const store = useStore()
     const routers = computed(() => store.state.permission.routers)
     const menuRouters = computed(() => routers.value[0].children)

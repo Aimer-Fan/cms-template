@@ -2,7 +2,10 @@ import { defineAsyncComponent } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import Layout from '@/components/Layout/index.vue'
 import BlankLayout from '@/components/Layout/BlankLayout.vue'
-import { HomeOutlined } from '@ant-design/icons-vue'
+import {
+  HomeOutlined,
+  WarningOutlined
+} from '@ant-design/icons-vue'
 
 export const asyncRouters: Array<RouteRecordRaw> = [
   {
@@ -20,7 +23,7 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'error',
         name: 'error',
-        meta: { title: 'Error' },
+        meta: { title: 'Error', icon: WarningOutlined },
         component: BlankLayout,
         children: [
           {

@@ -100,7 +100,6 @@ export default defineComponent({
     const store = useStore()
     const avatar = computed(() => store.state.user.avatar)
     const toggleCollapsed = (collapsed: boolean) => {
-      console.log('ToggleCollapsed', collapsed)
       store.dispatch('ToggleCollapsed', collapsed)
     }
     const collapsed = computed(() => store.state.app.collapsed)

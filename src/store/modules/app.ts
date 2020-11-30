@@ -7,7 +7,7 @@ import {
 
 const state: AppState = {
   device: 'desktop',
-  collapsed: true
+  collapsed: false
 }
 
 const user: Module<AppState, any> = {
