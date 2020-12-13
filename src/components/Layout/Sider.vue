@@ -63,15 +63,22 @@ export default defineComponent({
     const routers = computed(() => store.state.permission.routers)
     const menuRouters = computed(() => routers.value[0].children)
     const selectedKeys = computed(() => [router.currentRoute.value.fullPath])
+    const openKeys = ref<Array<string>>([])
+    const handleOpenChange = (keys: Array<string>) => {
+      // openKeys.value.push('/error')
+      // keys.forEach(key => openKeys.push(key))
+      // openKeys.value = keys
+      console.log(openKeys.value, keys)
+    }
     return (
       <Menu
         mode="inline"
         selectedKeys={ selectedKeys.value }
+        onOpenChange={ handleOpenChange }
       >
         { generateMenu(menuRouters.value) }
       </Menu>
     )
   }
 })
-
 </script>

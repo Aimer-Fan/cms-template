@@ -13,3 +13,8 @@ export interface AppState {
   device: string;
   collapsed: boolean;
 }
+
+export interface ExecptionConfig {
+  title: string;
+  desc: string;
+}
