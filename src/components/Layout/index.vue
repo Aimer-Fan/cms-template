@@ -46,6 +46,7 @@ export default defineComponent({
   white-space: nowrap;
   overflow: hidden;
   .logo {
+    transition: 0.2s margin;
     height: 50%;
   }
 }

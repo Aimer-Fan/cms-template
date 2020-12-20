@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { h, computed, defineComponent, ref } from 'vue'
+import { h, computed, defineComponent, ref, onMounted } from 'vue'
 import path from 'path'
 import { useStore } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
@@ -54,29 +54,34 @@ function generateMenu (routerList: Array<RouteRecordRaw>, basePath?: string) {
   })
 }
 
-// function handleOpenChange (keys: Array<string>, openKeys: Ref<Array<string>>) {
-// }
 export default defineComponent({
   name: 'Sider',
-  render () {
+  setup () {
     const store = useStore()
     const routers = computed(() => store.state.permission.routers)
     const menuRouters = computed(() => routers.value[0].children)
     const selectedKeys = computed(() => [router.currentRoute.value.fullPath])
     const openKeys = ref<Array<string>>([])
     const handleOpenChange = (keys: Array<string>) => {
-      // openKeys.value.push('/error')
-      // keys.forEach(key => openKeys.push(key))
-      // openKeys.value = keys
-      console.log(openKeys.value, keys)
+      openKeys.value = keys
     }
-    return (
+    onMounted(() => {
+      const mactched = router.currentRoute.value.matched
+      mactched.pop()
+      if (mactched.length > 1) {
+        mactched.shift()
+      }
+      const result = mactched.map(item => item.path)
+      openKeys.value = result
+    })
+    return () => (
       <Menu
         mode="inline"
-        selectedKeys={ selectedKeys.value }
-        onOpenChange={ handleOpenChange }
+        selectedKeys={selectedKeys.value}
+        openKeys={openKeys.value}
+        onOpenChange={handleOpenChange}
       >
-        { generateMenu(menuRouters.value) }
+        {generateMenu(menuRouters.value)}
       </Menu>
     )
   }
