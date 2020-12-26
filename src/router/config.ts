@@ -1,6 +1,6 @@
 // import { defineAsyncComponent } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
-// import Layout from '@/components/Layout/index.vue'
+import Layout from '@/components/Layout/index.vue'
 import BlankLayout from '@/components/Layout/BlankLayout.vue'
 import {
   HomeOutlined,
@@ -12,7 +12,7 @@ export const asyncRouters: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/dashboard',
     name: 'home',
-    component: () => import('@/components/Layout/index.vue'),
+    component: () => Layout,
     children: [
       {
         path: 'dashboard',
@@ -24,13 +24,27 @@ export const asyncRouters: Array<RouteRecordRaw> = [
         path: 'error',
         name: 'error',
         meta: { title: 'Error', icon: WarningOutlined },
-        component: BlankLayout,
+        component: () => BlankLayout,
         children: [
           {
             path: '404',
             name: '404',
             meta: { title: '404' },
             component: () => import('@/views/Error/404.vue')
+          }
+        ]
+      },
+      {
+        path: 'table',
+        name: 'table',
+        meta: { title: 'Table' },
+        component: () => BlankLayout,
+        children: [
+          {
+            path: 'basic-table',
+            name: 'BasicTable',
+            meta: { title: 'BasicTable' },
+            component: () => import('@/views/Table/BasicTable/index.vue')
           }
         ]
       }

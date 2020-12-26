@@ -1,11 +1,12 @@
 <script lang="tsx">
-import { h, computed, defineComponent, ref, onMounted } from 'vue'
+import { h, computed, defineComponent, ref, onMounted, watch, watchEffect } from 'vue'
 import path from 'path'
 import { useStore } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
 import { isExternal } from '@/utils/validate'
 import router from '@/router'
+import { Route } from 'ant-design-vue/lib/breadcrumb/Breadcrumb'
 
 const resolvePath = (basePath: string, routePath: string): string => {
   if (isExternal(routePath)) {
@@ -62,18 +63,27 @@ export default defineComponent({
     const menuRouters = computed(() => routers.value[0].children)
     const selectedKeys = computed(() => [router.currentRoute.value.fullPath])
     const openKeys = ref<Array<string>>([])
-    const handleOpenChange = (keys: Array<string>) => {
-      openKeys.value = keys
-    }
-    onMounted(() => {
-      const mactched = router.currentRoute.value.matched
-      mactched.pop()
-      if (mactched.length > 1) {
-        mactched.shift()
+    let cachedOpenKeys: Array<string> = []
+    const handleOpenChange = (keys: Array<string>) => { openKeys.value = keys }
+    watch(() => store.getters.collapsed, (value) => {
+      if (value) {
+        cachedOpenKeys = openKeys.value.concat()
+        openKeys.value = []
+      } else {
+        openKeys.value = cachedOpenKeys
       }
-      const result = mactched.map(item => item.path)
-      openKeys.value = result
     })
+    watch(router.currentRoute, (currentRoute) => {
+      if (currentRoute) {
+        const mactched = currentRoute.matched
+        mactched.pop()
+        if (mactched.length > 1) {
+          mactched.shift()
+        }
+        const result = mactched.map(item => item.path)
+        openKeys.value = result
+      }
+    }, { immediate: true })
     return () => (
       <Menu
         mode="inline"

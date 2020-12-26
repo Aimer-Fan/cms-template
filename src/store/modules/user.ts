@@ -53,6 +53,11 @@ const user: Module<UserState, any> = {
       context.commit('SET_TOKEN', '')
       context.commit('SET_AVATAR', '')
     }
+  },
+
+  getters: {
+    token: state => state.token,
+    roles: state => state.roles
   }
 }
 

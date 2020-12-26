@@ -26,6 +26,11 @@ const user: Module<AppState, any> = {
     ToggleCollapsed (context, collapsed) {
       context.commit(TOGGLE_COLLAPSED, collapsed)
     }
+  },
+
+  getters: {
+    collapsed: state => state.collapsed,
+    device: state => state.device
   }
 }
 
