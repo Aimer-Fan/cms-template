@@ -22,12 +22,12 @@ router.beforeEach(async (to, from, next) => {
         routers.forEach((r: RouteRecordRaw) => router.addRoute(r))
         next({ ...to })
       } else {
-        next()
+        next(true)
       }
     }
   } else {
     if (whiteList.includes(to.path)) {
-      next()
+      next(true)
     } else {
       router.replace('/login')
     }

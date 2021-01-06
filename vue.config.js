@@ -8,5 +8,7 @@ module.exports = {
         pathRewrite: { '^/api': '/' }
       }
     }
-  }
+  },
+  productionSourceMap: false,
+  publicPath: './'
 }
