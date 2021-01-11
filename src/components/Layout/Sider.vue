@@ -1,12 +1,11 @@
 <script lang="tsx">
-import { h, computed, defineComponent, ref, onMounted, watch, watchEffect } from 'vue'
+import { h, computed, defineComponent, ref, watch } from 'vue'
 import path from 'path'
 import { useStore } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
 import { isExternal } from '@/utils/validate'
 import router from '@/router'
-import { Route } from 'ant-design-vue/lib/breadcrumb/Breadcrumb'
 
 const resolvePath = (basePath: string, routePath: string): string => {
   if (isExternal(routePath)) {
@@ -75,13 +74,12 @@ export default defineComponent({
     })
     watch(router.currentRoute, (currentRoute) => {
       if (currentRoute) {
-        const mactched = currentRoute.matched
-        mactched.pop()
-        if (mactched.length > 1) {
-          mactched.shift()
+        const mactchedPath = currentRoute.matched.map(item => item.path)
+        mactchedPath.pop()
+        if (mactchedPath.length > 1) {
+          mactchedPath.shift()
         }
-        const result = mactched.map(item => item.path)
-        openKeys.value = result
+        openKeys.value = mactchedPath
       }
     }, { immediate: true })
     return () => (

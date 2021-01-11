@@ -19,15 +19,16 @@ router.beforeEach(async (to, from, next) => {
         const roles = userInfo.roles
         await store.dispatch('GenerateRouters', roles)
         const routers = store.state.permission.routers
+        console.log(routers)
         routers.forEach((r: RouteRecordRaw) => router.addRoute(r))
         next({ ...to })
       } else {
-        next(true)
+        next()
       }
     }
   } else {
     if (whiteList.includes(to.path)) {
-      next(true)
+      next()
     } else {
       router.replace('/login')
     }

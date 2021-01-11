@@ -1,20 +1,34 @@
 import { asyncRouters } from '@/router/config'
 import { RouteRecordRaw } from 'vue-router'
 import { Module } from 'vuex'
+import { union } from 'lodash'
 
 interface PermissionState {
   routers: Array<RouteRecordRaw>;
+}
+
+interface PermissionStore {
+  permission: PermissionState;
+}
+interface Role {
+  name: string;
+  permissions: Array<RouterPermission>;
+}
+
+interface RouterPermission {
+  name: string;
+  components: Array<string>;
 }
 
 const permissionState: PermissionState = {
   routers: []
 }
 
-function hasPermission (permission: Array<any>, route: RouteRecordRaw) {
+function hasPermission (permissions: Array<RouterPermission>, route: RouteRecordRaw) {
   if (route.meta && route.meta.permission) {
     let flag = false
-    for (let i = 0, len = permission.length; i < len; i++) {
-      flag = route.meta.permission.includes(permission[i])
+    for (let i = 0, len = permissions.length; i < len; i++) {
+      flag = route.meta.permission.includes(permissions[i].name)
       if (flag) {
         return true
       }
@@ -24,11 +38,14 @@ function hasPermission (permission: Array<any>, route: RouteRecordRaw) {
   return true
 }
 
-function getAuthorizedRouters (asyncRouters: Array<RouteRecordRaw>, roles: any): Array<RouteRecordRaw> {
+function getAuthorizedRouters (
+  asyncRouters: Array<RouteRecordRaw>,
+  routerPermissions: Array<RouterPermission>
+): Array<RouteRecordRaw> {
   const authorizedRouters = asyncRouters.filter(route => {
-    if (hasPermission(roles.permissionList, route)) {
+    if (hasPermission(routerPermissions, route)) {
       if (route.children && route.children.length) {
-        route.children = getAuthorizedRouters(route.children, roles)
+        route.children = getAuthorizedRouters(route.children, routerPermissions)
       }
       return true
     }
@@ -37,7 +54,7 @@ function getAuthorizedRouters (asyncRouters: Array<RouteRecordRaw>, roles: any):
   return authorizedRouters
 }
 
-const permission: Module<PermissionState, any> = {
+const permission: Module<PermissionState, PermissionStore> = {
   state: permissionState,
   mutations: {
     SET_ROUTERS (state, routers) {
@@ -45,10 +62,9 @@ const permission: Module<PermissionState, any> = {
     }
   },
   actions: {
-    GenerateRouters (context, roles) {
-      // console.log(roles)
-      // const authorizedRouters = getAuthorizedRouters(asyncRouters, roles)
-      const authorizedRouters = asyncRouters
+    GenerateRouters (context, roles: Array<Role>) {
+      const routerPermissions = union(...roles.map(role => role.permissions))
+      const authorizedRouters = getAuthorizedRouters(asyncRouters, routerPermissions)
       context.commit('SET_ROUTERS', authorizedRouters)
     }
   }

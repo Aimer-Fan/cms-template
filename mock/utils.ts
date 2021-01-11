@@ -4,9 +4,11 @@ export function getBody (config: any) {
   return config.body && JSON.parse(config.body)
 }
 
-export function genResponse (code: number, body: any): ResponseBody {
-  return {
+export function generateResponse (code: number, body: any): ResponseBody {
+  const result = {
     code: code,
     data: body
   }
+  console.log('[Mock response]: ', result)
+  return result
 }
