@@ -12,6 +12,8 @@
     "commit-msg": "node scripts/pre-commit.ts"
   },
   "dependencies": {
+    "@antv/data-set": "^0.11.7",
+    "@antv/g2plot": "^2.3.7",
     "@types/enquire.js": "^2.1.2",
     "@types/nprogress": "^0.2.0",
     "@vue/composition-api": "^1.0.0-beta.19",

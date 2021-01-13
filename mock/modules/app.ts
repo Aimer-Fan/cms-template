@@ -29,6 +29,14 @@ const getUserInfo = () => {
           {
             name: 'dashboard',
             components: ['']
+          },
+          {
+            name: 'error',
+            components: ['']
+          },
+          {
+            name: 'table',
+            components: ['']
           }
         ]
       }

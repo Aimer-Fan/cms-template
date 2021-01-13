@@ -1,6 +1,6 @@
 <template>
   <div class="flex-center-center" style="height:100%">
-    <a-result status="404" title="404" sub-title="Sorry, the page you visited does not exist.">
+    <a-result status="403" title="403" sub-title="Sorry, you are not authorized to access this page.">
       <template #extra>
         <router-link to="/">
           <a-button type="primary">
@@ -15,6 +15,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: '404'
+  name: '403'
 })
 </script>

@@ -1,13 +1,33 @@
 <template>
   <a-layout>
-    <a-layout-sider theme="light" collapsible :trigger="null" :collapsed="collapsed">
+    <a-layout-sider v-if="!isMobile" theme="light" collapsible :trigger="null" :collapsed="collapsed">
       <div class="cms-global-logo">
-        <img src="@/assets/logo.png" class="logo"/>
-        <span class="ml-12 cms-global-title">CMS Template</span>
+        <router-link to="/">
+          <img src="@/assets/logo.png" class="logo"/>
+          <span class="ml-12 cms-global-title">CMS Template</span>
+        </router-link>
       </div>
       <Sider />
     </a-layout-sider>
-    <a-layout>
+
+    <a-drawer
+      v-else
+      :visible="!collapsed"
+      placement="left"
+      :closable="false"
+      :bodyStyle="{ padding: 0 }"
+      @close="toggleCollapsed"
+    >
+      <div class="cms-global-logo">
+        <router-link to="/">
+          <img src="@/assets/logo.png" class="logo"/>
+          <span class="ml-12 cms-global-title">CMS Template</span>
+        </router-link>
+      </div>
+      <Sider/>
+    </a-drawer>
+
+    <a-layout theme="light">
       <a-layout-header class="cms-global-header">
         <GlobalHeader />
       </a-layout-header>
@@ -30,12 +50,17 @@ export default defineComponent({
   setup () {
     const store = useStore()
     const collapsed = computed(() => store.state.app.collapsed)
-    return { collapsed }
+    const isMobile = computed(() => store.state.app.device === 'mobile')
+    const toggleCollapsed = () => {
+      store.dispatch('ToggleCollapsed', true)
+    }
+    return { isMobile, collapsed, toggleCollapsed }
   }
 })
 </script>
 
 <style lang="less" scoped>
+@import '~ant-design-vue/dist/antd.less';
 .cms-global-logo {
   height: 60px;
   font-size: 18px;
@@ -45,6 +70,9 @@ export default defineComponent({
   font-weight: 450;
   white-space: nowrap;
   overflow: hidden;
+  .cms-global-title {
+    color: @text-color;
+  }
   .logo {
     transition: 0.2s margin;
     height: 50%;

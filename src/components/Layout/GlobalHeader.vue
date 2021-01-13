@@ -5,7 +5,7 @@
     <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
     <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
     <a-dropdown :trigger="['click']">
-      <img :src="avatar" alt="avatar" class="avatar mr-6">
+      <img :src="avatar" class="avatar mr-6">
       <template #overlay>
       <a-menu>
         <a-menu-item key="0">
