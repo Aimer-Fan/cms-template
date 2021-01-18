@@ -1,22 +1,24 @@
 <template>
-  <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
-  <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
-  <div class="fr cms-header">
-    <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
-    <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
-    <a-dropdown :trigger="['click']">
-      <img :src="avatar" class="avatar mr-6">
-      <template #overlay>
-      <a-menu>
-        <a-menu-item key="0">
-          <span><UserOutlined />User Center</span>
-        </a-menu-item>
-        <a-menu-item key="1">
-          <span @click="logout"><LogoutOutlined />Logout</span>
-        </a-menu-item>
-      </a-menu>
-    </template>
-    </a-dropdown>
+  <div>
+    <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
+    <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
+    <div class="fr cms-header">
+      <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
+      <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
+      <a-dropdown :trigger="['click']">
+        <img :src="avatar" class="avatar mr-6">
+        <template #overlay>
+        <a-menu>
+          <a-menu-item key="0">
+            <span><UserOutlined />User Center</span>
+          </a-menu-item>
+          <a-menu-item key="1">
+            <span @click="logout"><LogoutOutlined />Logout</span>
+          </a-menu-item>
+        </a-menu>
+      </template>
+      </a-dropdown>
+    </div>
   </div>
 </template>
 

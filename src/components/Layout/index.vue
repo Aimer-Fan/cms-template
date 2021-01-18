@@ -1,6 +1,13 @@
 <template>
   <a-layout>
-    <a-layout-sider v-if="!isMobile" theme="light" collapsible :trigger="null" :collapsed="collapsed">
+    <a-layout-sider
+      v-if="!isMobile"
+      theme="light"
+      collapsible
+      :trigger="null"
+      :collapsed="collapsed"
+      :style="{ zIndex: 1, overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }"
+    >
       <div class="cms-global-logo">
         <router-link to="/">
           <img src="@/assets/logo.png" class="logo"/>
@@ -27,11 +34,11 @@
       <Sider/>
     </a-drawer>
 
-    <a-layout theme="light">
-      <a-layout-header class="cms-global-header">
+    <a-layout theme="light" :style="{ marginLeft: '200px' }">
+      <a-layout-header class="cms-global-header" :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
         <GlobalHeader />
       </a-layout-header>
-      <a-layout-content>
+      <a-layout-content :style="{ marginTop: '64px' }">
         <router-view class="main-layout-content"></router-view>
       </a-layout-content>
     </a-layout>

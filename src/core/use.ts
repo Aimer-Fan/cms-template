@@ -9,7 +9,11 @@ import {
   Dropdown,
   Menu,
   Result,
-  Drawer
+  Drawer,
+  Row,
+  Col,
+  Card,
+  Statistic
 } from 'ant-design-vue'
 
 export default {
@@ -23,5 +27,9 @@ export default {
     app.use(Menu)
     app.use(Result)
     app.use(Drawer)
+    app.use(Row)
+    app.use(Col)
+    app.use(Card)
+    app.use(Statistic)
   }
 }
