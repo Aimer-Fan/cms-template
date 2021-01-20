@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="global-header-wrap">
     <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
     <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
     <div class="fr cms-header">
@@ -125,5 +125,12 @@ export default defineComponent({
     border-radius: 51%;
     cursor: pointer;
   }
+}
+.global-header-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 </style>

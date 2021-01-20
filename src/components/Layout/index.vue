@@ -34,8 +34,8 @@
       <Sider/>
     </a-drawer>
 
-    <a-layout theme="light" :style="{ marginLeft: '200px' }">
-      <a-layout-header class="cms-global-header" :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
+    <a-layout theme="light" class="cms-right-side" :class="{ 'collapsed': collapsed }">
+      <a-layout-header class="cms-global-header" :style="{ position: 'fixed', zIndex: 1, right: 0, top: 0 }">
         <GlobalHeader />
       </a-layout-header>
       <a-layout-content :style="{ marginTop: '64px' }">
@@ -68,34 +68,5 @@ export default defineComponent({
 
 <style lang="less" scoped>
 @import '~ant-design-vue/dist/antd.less';
-.cms-global-logo {
-  height: 60px;
-  font-size: 18px;
-  box-shadow: 0px 1px 4px #eeeeee;
-  line-height: 60px;
-  text-align: center;
-  font-weight: 450;
-  white-space: nowrap;
-  overflow: hidden;
-  .cms-global-title {
-    color: @text-color;
-  }
-  .logo {
-    transition: 0.2s margin;
-    height: 50%;
-  }
-}
-.cms-global-header {
-  padding: 0 15px;
-  background: #ffffff;
-  box-shadow: 0 1px 4px #eeeeee;
-}
-.ant-layout-sider-collapsed {
-  .logo{
-    margin-left: 25px;
-  }
-  .cms-global-title {
-    margin-left: 25px;
-  }
-}
+@import './index.less';
 </style>
