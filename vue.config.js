@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const webpack = require('webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+
 module.exports = {
   devServer: {
     port: 4396,
@@ -10,6 +15,13 @@ module.exports = {
     }
   },
   productionSourceMap: false,
+  configureWebpack: {
+    plugins: [
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new BundleAnalyzerPlugin(),
+      new LodashModuleReplacementPlugin()
+    ]
+  },
   css: {
     loaderOptions: {
       less: {
