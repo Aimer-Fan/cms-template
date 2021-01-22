@@ -5,7 +5,8 @@ import BlankLayout from '@/components/Layout/BlankLayout.vue'
 import {
   HomeOutlined,
   WarningOutlined,
-  TableOutlined
+  TableOutlined,
+  ToolOutlined
 } from '@ant-design/icons-vue'
 
 export const asyncRouters: Array<RouteRecordRaw> = [
@@ -20,6 +21,34 @@ export const asyncRouters: Array<RouteRecordRaw> = [
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: HomeOutlined, permission: ['dashboard'] },
         component: () => import('@/views/Dashboard/index.vue')
+      },
+      {
+        path: 'table',
+        name: 'table',
+        meta: { title: 'Table', icon: TableOutlined, permission: ['table'] },
+        component: async () => BlankLayout,
+        children: [
+          {
+            path: 'basic-table',
+            name: 'BasicTable',
+            meta: { title: 'BasicTable', permission: ['table'] },
+            component: () => import('@/views/Table/BasicTable/index.vue')
+          }
+        ]
+      },
+      {
+        path: 'tools',
+        name: 'tools',
+        meta: { title: 'Tools', icon: ToolOutlined, permission: ['tools'] },
+        component: async () => BlankLayout,
+        children: [
+          {
+            path: 'monaco-editor',
+            name: 'MonacoEditor',
+            meta: { title: 'MonacoEditor', permission: ['tools'] },
+            component: () => import('@/views/Tools/Monaco/index.vue')
+          }
+        ]
       },
       {
         path: 'error',
@@ -44,20 +73,6 @@ export const asyncRouters: Array<RouteRecordRaw> = [
             name: '500',
             meta: { title: '500', permission: ['error'] },
             component: () => import('@/views/Error/500.vue')
-          }
-        ]
-      },
-      {
-        path: 'table',
-        name: 'table',
-        meta: { title: 'Table', icon: TableOutlined, permission: ['table'] },
-        component: async () => BlankLayout,
-        children: [
-          {
-            path: 'basic-table',
-            name: 'BasicTable',
-            meta: { title: 'BasicTable', permission: ['table'] },
-            component: () => import('@/views/Table/BasicTable/index.vue')
           }
         ]
       }

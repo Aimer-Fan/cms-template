@@ -13,7 +13,8 @@ import {
   Row,
   Col,
   Card,
-  Statistic
+  Statistic,
+  Select
 } from 'ant-design-vue'
 
 export default {
@@ -31,5 +32,6 @@ export default {
     app.use(Col)
     app.use(Card)
     app.use(Statistic)
+    app.use(Select)
   }
 }

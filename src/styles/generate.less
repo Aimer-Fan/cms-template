@@ -1,3 +1,11 @@
+.generate-mg(24);
+.generate-mg(@n, @i: 0) when (@i =< @n) {
+  .mg@{i} {
+    margin: (1px * @i);
+  }
+  .generate-mg(@n, (@i + 6));
+}
+
 .generate-mt(24);
 .generate-mt(@n, @i: 0) when (@i =< @n) {
   .mt-@{i} {
@@ -28,6 +36,14 @@
     margin-left: (1px * @i);
   }
   .generate-ml(@n, (@i + 6));
+}
+
+.generate-pd(24);
+.generate-pd(@n, @i: 0) when (@i =< @n) {
+  .pd@{i} {
+    padding: (1px * @i);
+  }
+  .generate-pd(@n, (@i + 6));
 }
 
 .generate-pt(24);
