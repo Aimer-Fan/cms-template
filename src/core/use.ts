@@ -14,7 +14,12 @@ import {
   Col,
   Card,
   Statistic,
-  Select
+  Select,
+  Steps,
+  DatePicker,
+  Switch,
+  Checkbox,
+  Radio
 } from 'ant-design-vue'
 
 export default {
@@ -33,5 +38,10 @@ export default {
     app.use(Card)
     app.use(Statistic)
     app.use(Select)
+    app.use(Steps)
+    app.use(DatePicker)
+    app.use(Switch)
+    app.use(Checkbox)
+    app.use(Radio)
   }
 }
