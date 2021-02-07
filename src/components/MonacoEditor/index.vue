@@ -6,6 +6,11 @@
 import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import * as monaco from 'monaco-editor'
 
+/**
+ * @description 基于 Monaco 编辑器的二次封装 https://github.com/microsoft/monaco-editor
+ * @author AimerFan
+ * @date 2021/02/05
+*/
 export default defineComponent({
   name: 'MonacoEditor',
   props: {
@@ -30,25 +35,25 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      if (!container.value) return
-      if (instance) return
-      const { language, theme, readOnly, value } = props
-      instance = monaco.editor.create(container.value, {
-        automaticLayout: true,
-        mouseWheelZoom: true,
-        theme,
-        language,
-        readOnly,
-        value
-      })
+      if (container.value && !instance) {
+        const { language, theme, readOnly, value } = props
+        const instance = monaco.editor.create(container.value, {
+          automaticLayout: true,
+          mouseWheelZoom: true,
+          theme,
+          language,
+          readOnly,
+          value
+        })
 
-      instance.onDidChangeModelContent((e) => {
-        if (!instance) return
-        const value = instance.getValue()
-        if (value !== props.value) {
-          emit('update:value', value, e)
-        }
-      })
+        instance.onDidChangeModelContent((e) => {
+          if (!instance) return
+          const value = instance.getValue()
+          if (value !== props.value) {
+            emit('update:value', value, e)
+          }
+        })
+      }
     })
 
     onUnmounted(() => {

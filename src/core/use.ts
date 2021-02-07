@@ -1,5 +1,6 @@
-import { App } from 'vue'
+import { App, h } from 'vue'
 import 'ant-design-vue/dist/antd.css'
+import { LoadingOutlined } from '@ant-design/icons-vue'
 import {
   Button,
   Icon,
@@ -19,8 +20,14 @@ import {
   DatePicker,
   Switch,
   Checkbox,
-  Radio
+  Radio,
+  Spin
 } from 'ant-design-vue'
+
+// 重置默认的 Loading 图标
+Spin.setDefaultIndicator({
+  indicator: h(LoadingOutlined)
+})
 
 export default {
   install (app: App) {
@@ -43,5 +50,6 @@ export default {
     app.use(Switch)
     app.use(Checkbox)
     app.use(Radio)
+    app.use(Spin)
   }
 }

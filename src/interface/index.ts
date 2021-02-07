@@ -12,4 +12,5 @@ export interface UserState {
 export interface AppState {
   device: string;
   collapsed: boolean;
+  loading: boolean;
 }

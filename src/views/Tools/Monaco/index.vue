@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form class="bgw pd6" layout="inline">
+    <a-form class="bgw pd-12" layout="inline">
       <a-form-item label="theme">
         <a-select v-model:value="theme" style="width:180px;">
           <a-select-option value="vs">vs</a-select-option>
