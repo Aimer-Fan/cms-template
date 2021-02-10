@@ -29,9 +29,11 @@
     "screenfull": "^5.0.2",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-request": "^1.0.2",
     "vue-router": "^4.0.2",
     "vuex": "^4.0.0-0",
-    "vuex-composition-helpers": "^1.0.21"
+    "vuex-composition-helpers": "^1.0.21",
+    "wangeditor": "^4.6.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",

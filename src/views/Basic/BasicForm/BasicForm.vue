@@ -1,11 +1,6 @@
 <template>
-  <div class="bgw pd-12" >
-    <a-steps :current="current" class="mb-24">
-      <a-step v-for="step in steps" :key="step.title" :title="step.title"></a-step>
-    </a-steps>
-
-    <a-form :model="form" :label-col="labelCol" :wrapper-col="wrapperCol">
-    <a-form-item label="Activity name">
+  <a-form :model="form" ref="formRef" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+    <a-form-item label="Activity name" name="name">
       <a-input v-model:value="form.name" />
     </a-form-item>
     <a-form-item label="Activity zone">
@@ -57,63 +52,62 @@
       <a-input v-model:value="form.desc" type="textarea" />
     </a-form-item>
   </a-form>
-
-    <div class="steps-action">
-      <a-button v-if="current > 0" class="mr-12" @click="prev">
-        上一步
-      </a-button>
-      <a-button v-if="current < steps.length - 1" type="primary" @click="next">
-        下一步
-      </a-button>
-      <a-button
-        v-if="current == steps.length - 1"
-        type="primary"
-      >
-        提交
-      </a-button>
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'BasicTable',
-  data () {
-    return {
-      current: 0,
-      steps: [
-        { title: '基本信息' },
-        { title: '编辑内容' },
-        { title: '预览效果' }
-      ],
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      form: {
-        name: '',
-        region: undefined,
-        date1: undefined,
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+/**
+ * @description 基本信息表单
+ * @author AimerFan
+ * @date 2021/02/08
+*/
+import { defineComponent, reactive, ref, UnwrapRef } from 'vue'
+import { useStore } from 'vuex'
+import { FormState } from './index'
 
+/**
+ * @description 基本信息
+ * @author AimerFan
+ * @date 2021/02/08
+*/
+export default defineComponent({
+  name: 'BasicForm',
+  setup () {
+    const formRef = ref()
+    const form: UnwrapRef<FormState> = reactive({
+      name: '',
+      region: undefined,
+      date1: undefined,
+      delivery: false,
+      type: [],
+      resource: '',
+      desc: ''
+    })
+
+    const rules = {
+      name: { required: true, message: 'Please input Activity name', trigger: 'blur' }
     }
+
+    const valide = async () => {
+      await formRef.value.validate()
+    }
+
+    const getValue = (): FormState => {
+      return form
+    }
+
+    return { form, rules, formRef, valide, getValue }
   },
-  methods: {
-    next () {
-      this.current++
+  computed: {
+    labelCol () {
+      const store = useStore()
+      const isMobile = store.getters.device === 'mobile'
+      return isMobile ? { span: 24 } : { span: 4 }
     },
-    prev () {
-      this.current--
+    wrapperCol () {
+      const store = useStore()
+      const isMobile = store.getters.device === 'mobile'
+      return isMobile ? { span: 24 } : { span: 14 }
     }
   }
 })
 </script>
-
-<style scoped lang="less">
-.steps-action {
-  text-align: right;
-}
-</style>

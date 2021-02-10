@@ -19,20 +19,26 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: HomeOutlined, permission: ['dashboard'] },
+        meta: { title: '仪表盘', icon: HomeOutlined, permission: ['dashboard'] },
         component: () => import('@/views/Dashboard/index.vue')
       },
       {
-        path: 'table',
-        name: 'table',
-        meta: { title: 'Table', icon: TableOutlined, permission: ['table'] },
+        path: 'basic',
+        name: 'basic',
+        meta: { title: '基本元素', icon: TableOutlined, permission: ['basic'] },
         component: async () => BlankLayout,
         children: [
           {
+            path: 'basic-form',
+            name: 'basicForm',
+            meta: { title: '基本表单', permission: ['basic'] },
+            component: () => import('@/views/Basic/BasicForm/index.vue')
+          },
+          {
             path: 'basic-table',
-            name: 'BasicTable',
-            meta: { title: 'BasicTable', permission: ['table'] },
-            component: () => import('@/views/Table/BasicTable/index.vue')
+            name: 'basicTable',
+            meta: { title: '基本表格', permission: ['basic'] },
+            component: () => import('@/views/Basic/BasicTable/index.vue')
           }
         ]
       },
@@ -77,6 +83,11 @@ export const asyncRouters: Array<RouteRecordRaw> = [
         ]
       }
     ]
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: async () => import('@/views/Error/404.vue')
   },
   {
     path: '/:other(.*)/',

@@ -21,7 +21,9 @@ import {
   Switch,
   Checkbox,
   Radio,
-  Spin
+  Spin,
+  Descriptions,
+  Table
 } from 'ant-design-vue'
 
 // 重置默认的 Loading 图标
@@ -51,5 +53,7 @@ export default {
     app.use(Checkbox)
     app.use(Radio)
     app.use(Spin)
+    app.use(Descriptions)
+    app.use(Table)
   }
 }

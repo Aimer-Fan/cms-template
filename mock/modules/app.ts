@@ -35,7 +35,7 @@ const getUserInfo = () => {
             components: ['']
           },
           {
-            name: 'table',
+            name: 'basic',
             components: ['']
           },
           {
