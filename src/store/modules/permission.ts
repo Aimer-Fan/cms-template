@@ -28,7 +28,7 @@ function hasPermission (permissions: Array<RouterPermission>, route: RouteRecord
   if (route.meta && route.meta.permission) {
     let flag = false
     for (let i = 0, len = permissions.length; i < len; i++) {
-      flag = route.meta.permission.includes(permissions[i].name)
+      flag = route.meta.permission instanceof Array && route.meta.permission.includes(permissions[i].name)
       if (flag) {
         return true
       }
