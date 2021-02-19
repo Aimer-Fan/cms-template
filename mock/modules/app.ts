@@ -39,6 +39,10 @@ const getUserInfo = () => {
             components: ['']
           },
           {
+            name: 'user',
+            components: ['']
+          },
+          {
             name: 'tools',
             components: ['']
           }

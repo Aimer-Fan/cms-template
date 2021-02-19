@@ -1,5 +1,5 @@
 <template>
-  <div ref="container"></div>
+  <div ref="container" style="position:relative;z-index:0;"></div>
 </template>
 
 <script lang="ts">
@@ -9,12 +9,18 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
   name: 'WangEditor',
-  setup () {
+  props: {
+    value: { type: String, default: '' }
+  },
+  setup (props, { emit }) {
     const container = ref()
     let editor: null | E = null
 
     onMounted(() => {
       editor = new E(container.value)
+      editor.config.onchange = (newHTML: string) => {
+        emit('update:value', newHTML)
+      }
       editor.create()
     })
 
@@ -27,7 +33,3 @@ export default defineComponent({
 })
 
 </script>
-
-<style scoped lang="less">
-
-</style>

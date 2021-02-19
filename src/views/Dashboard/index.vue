@@ -1,9 +1,9 @@
 
 <template>
   <div>
-    <Cards />
-    <Line class="mt-12" />
-    <a-row class="mt-12" :gutter="12">
+    <Cards class="mb-24" />
+    <Line />
+    <a-row class="mt-24" :gutter="24">
       <a-col :xs="24" :sm="12"><Column /></a-col>
       <a-col :xs="24" :sm="12"><Pie /></a-col>
     </a-row>

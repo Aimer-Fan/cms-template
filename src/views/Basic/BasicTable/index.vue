@@ -1,19 +1,22 @@
 <template>
-  <a-table
-    :columns="columns"
-    :row-key="record => record.login.uuid"
-    :data-source="dataSource"
-    :pagination="pagination"
-    :loading="loading"
-    @change="handleTableChange"
-  >
-    <template #name="{ text }">{{ text.first }} {{ text.last }}</template>
-  </a-table>
+  <a-card>
+    <a-table
+      :columns="columns"
+      :row-key="record => record.login.uuid"
+      :data-source="dataSource"
+      :pagination="pagination"
+      :loading="loading"
+      @change="handleTableChange"
+    >
+      <template #name="{ text }">{{ text.first }} {{ text.last }}</template>
+    </a-table>
+  </a-card>
 </template>
-<script>
-import { useRequest } from 'vue-request'
-import axios from 'axios'
-import { defineComponent, reactive } from 'vue'
+<script lang="ts">
+import { defineComponent, onMounted, reactive, ref, UnwrapRef } from 'vue'
+import { GetTableData } from '@/api/basic/basicTable'
+import { TableState, TableStateFilters } from 'ant-design-vue/lib/table/interface'
+
 const columns = [
   {
     title: 'Name',
@@ -28,14 +31,8 @@ const columns = [
     title: 'Gender',
     dataIndex: 'gender',
     filters: [
-      {
-        text: 'Male',
-        value: 'male'
-      },
-      {
-        text: 'Female',
-        value: 'female'
-      }
+      { text: 'Male', value: 'male' },
+      { text: 'Female', value: 'female' }
     ],
     width: '20%'
   },
@@ -45,32 +42,46 @@ const columns = [
   }
 ]
 
-const queryData = params => {
-  return axios.get('https://randomuser.me/api', {
-    params: params
-  })
+type Pagination = TableState['pagination']
+
+type APIParams = {
+  results: number;
+  page?: number;
+  sortField?: string;
+  sortOrder?: number;
+  [key: string]: any;
 }
 
+type APIResult = {
+  results: {
+    gender: 'female' | 'male';
+    name: string;
+    email: string;
+  }[];
+}
+/**
+ * @description 基本表格
+ * @author AimerFan
+ * @date 2021/02/18
+*/
 export default defineComponent({
   name: 'BasicForm',
   setup () {
-    const pagination = reactive({
-      total: 200
-    })
-    const { data: dataSource, run, loading } = useRequest(queryData, {
-      defaultParams: [
-        {
-          results: 10
-        }
-      ],
-      formatResult: res => res.data.results
-    })
+    const pagination: UnwrapRef<Pagination> = reactive({ total: 200 })
+    const dataSource = ref()
+    const loading = ref(false)
 
-    const handleTableChange = (pag, filters, sorter) => {
-      console.log(pag)
+    const bindTableData = async (params: APIParams) => {
+      loading.value = true
+      const { data } = await GetTableData<APIParams, APIResult>(params)
+      loading.value = false
+      dataSource.value = data.results
+    }
+
+    const handleTableChange = (pag: Pagination, filters: TableStateFilters, sorter: any) => {
       Object.assign(pagination, pag)
-      run({
-        results: pagination.pageSize,
+      bindTableData({
+        results: pagination.pageSize!,
         page: pagination.current,
         sortField: sorter.field,
         sortOrder: sorter.order,
@@ -78,9 +89,13 @@ export default defineComponent({
       })
     }
 
+    onMounted(() => {
+      bindTableData({ results: 10 })
+    })
+
     return {
-      dataSource,
       pagination,
+      dataSource,
       loading,
       columns,
       handleTableChange

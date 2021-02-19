@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <a-form class="bgw pd-12" layout="inline">
+  <a-card>
+    <a-form layout="inline">
       <a-form-item label="theme">
         <a-select v-model:value="theme" style="width:180px;">
           <a-select-option value="vs">vs</a-select-option>
@@ -15,9 +15,13 @@
         </a-select>
       </a-form-item>
     </a-form>
-    <MonacoEditor v-model:value="value" :language="language" :theme="theme" class="mt-12" style="height:800px"/>
+  </a-card>
+
+  <MonacoEditor v-model:value="value" :language="language" :theme="theme" class="mt-12" style="height:800px"/>
+
+  <a-card class="mt-24">
     <span>{{value}}</span>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts">

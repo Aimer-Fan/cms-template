@@ -12,7 +12,7 @@
         </a-input>
       </a-form-item>
       <a-form-item label="password">
-        <a-input-password v-model:value="ruleForm.password" placeholder="input password">
+        <a-input-password v-model:value="ruleForm.password" placeholder="input password" @keydown.enter="login">
           <template #prefix><LockOutlined style="color:rgba(0,0,0,.25)"/></template>
         </a-input-password>
       </a-form-item>

@@ -3,17 +3,17 @@
     <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
     <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
     <div class="fr cms-header">
-      <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen"  @click="fullScreen"/>
-      <FullscreenOutlined class="mr-12 icon" v-else  @click="fullScreen"/>
-      <a-dropdown :trigger="['click']">
+      <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen" title="退出全屏" @click="fullScreen"/>
+      <FullscreenOutlined class="mr-12 icon" v-else title="全屏" @click="fullScreen"/>
+      <a-dropdown :trigger="['hover']">
         <img :src="avatar" class="avatar mr-6">
         <template #overlay>
-        <a-menu>
+        <a-menu theme="light">
           <a-menu-item key="0">
-            <span><UserOutlined />User Center</span>
+            <span @click="go2user"><UserOutlined />个人中心</span>
           </a-menu-item>
           <a-menu-item key="1">
-            <span @click="logout"><LogoutOutlined />Logout</span>
+            <span @click="logout"><LogoutOutlined />退出登录</span>
           </a-menu-item>
         </a-menu>
       </template>
@@ -45,9 +45,11 @@ function logoutFn () {
   const logout = () => {
     const name = store.state.user.name
     Modal.confirm({
-      title: 'Are you sure logout?',
+      title: '确认登出吗？',
       icon: createVNode(ExclamationCircleOutlined),
-      content: 'This operation will logout this application.',
+      content: '此操作将会登出系统。',
+      okText: '确认',
+      cancelText: '取消',
       centered: true,
       onOk: () => {
         Logout()
@@ -57,6 +59,13 @@ function logoutFn () {
     })
   }
   return { logout }
+}
+function router2User () {
+  const router = useRouter()
+  const go2user = () => {
+    router.push({ path: '/user' })
+  }
+  return { go2user }
 }
 
 function fullScreenFn () {
@@ -88,6 +97,11 @@ function fullScreenFn () {
   return { isFullScreen, fullScreen }
 }
 
+/**
+ * @description 标题栏
+ * @author AimerFan
+ * @date 2021/02/19
+*/
 export default defineComponent({
   name: 'GlobalHeader',
   components: {
@@ -105,7 +119,14 @@ export default defineComponent({
       store.dispatch('ToggleCollapsed', collapsed)
     }
     const collapsed = computed(() => store.state.app.collapsed)
-    return { ...logoutFn(), ...fullScreenFn(), avatar, toggleCollapsed, collapsed }
+    return {
+      ...logoutFn(),
+      ...fullScreenFn(),
+      ...router2User(),
+      avatar,
+      toggleCollapsed,
+      collapsed
+    }
   }
 })
 </script>

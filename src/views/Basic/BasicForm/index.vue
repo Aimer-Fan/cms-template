@@ -1,5 +1,5 @@
 <template>
-  <div class="bgw pd-24" >
+  <a-card>
     <a-steps :current="current" class="mb-24">
       <a-step v-for="step in steps" :key="step.title" :title="step.title"></a-step>
     </a-steps>
@@ -22,7 +22,7 @@
         提交
       </a-button>
     </div>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts">

@@ -3,6 +3,11 @@ export interface ResponseBody {
   data: any;
 }
 
+export interface CustomResponse<T> {
+  code: number;
+  data: T;
+}
+
 export interface UserState {
   name: string;
   avatar: string;

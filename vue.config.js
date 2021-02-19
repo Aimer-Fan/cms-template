@@ -3,6 +3,7 @@
 const webpack = require('webpack')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+// const { getThemeVariables } = require('ant-design-vue/dist/theme')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
@@ -46,6 +47,9 @@ module.exports = {
     loaderOptions: {
       less: {
         javascriptEnabled: true
+        // modifyVars: getThemeVariables({
+        //   dark: true
+        // })
       }
     }
   }

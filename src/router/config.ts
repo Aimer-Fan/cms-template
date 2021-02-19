@@ -3,10 +3,11 @@ import { RouteRecordRaw } from 'vue-router'
 import Layout from '@/components/Layout/index.vue'
 import BlankLayout from '@/components/Layout/BlankLayout.vue'
 import {
-  HomeOutlined,
+  DashboardOutlined,
   WarningOutlined,
   TableOutlined,
-  ToolOutlined
+  ToolOutlined,
+  UserOutlined
 } from '@ant-design/icons-vue'
 
 export const asyncRouters: Array<RouteRecordRaw> = [
@@ -19,7 +20,7 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        meta: { title: '仪表盘', icon: HomeOutlined, permission: ['dashboard'] },
+        meta: { title: '仪表盘', icon: DashboardOutlined, permission: ['dashboard'] },
         component: () => import('@/views/Dashboard/index.vue')
       },
       {
@@ -45,21 +46,33 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'tools',
         name: 'tools',
-        meta: { title: 'Tools', icon: ToolOutlined, permission: ['tools'] },
+        meta: { title: '工具集', icon: ToolOutlined, permission: ['tools'] },
         component: async () => BlankLayout,
         children: [
           {
             path: 'monaco-editor',
             name: 'MonacoEditor',
-            meta: { title: 'MonacoEditor', permission: ['tools'] },
+            meta: { title: '代码编辑器', permission: ['tools'] },
             component: () => import('@/views/Tools/Monaco/index.vue')
+          },
+          {
+            path: 'rich-editor',
+            name: 'RichEditor',
+            meta: { title: '富文本编辑器', permission: ['tools'] },
+            component: () => import('@/views/Tools/RichEditor/index.vue')
           }
         ]
       },
       {
+        path: 'user',
+        name: 'user',
+        meta: { title: '个人中心', icon: UserOutlined, permission: ['user'] },
+        component: () => import('@/views/User/index.vue')
+      },
+      {
         path: 'error',
         name: 'error',
-        meta: { title: 'Error', icon: WarningOutlined, permission: ['error'] },
+        meta: { title: '错误页面', icon: WarningOutlined, permission: ['error'] },
         component: async () => BlankLayout,
         children: [
           {
@@ -85,11 +98,6 @@ export const asyncRouters: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/404',
-    name: '404',
-    component: async () => import('@/views/Error/404.vue')
-  },
-  {
     path: '/:other(.*)/',
     redirect: '/404'
   }
@@ -103,7 +111,7 @@ export const constantRouters: Array<RouteRecordRaw> = [
   },
   {
     path: '/404',
-    name: '404',
+    name: '/404',
     component: () => import('@/views/Error/404.vue')
   }
 ]

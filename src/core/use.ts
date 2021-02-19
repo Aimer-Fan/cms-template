@@ -1,5 +1,4 @@
 import { App, h } from 'vue'
-import 'ant-design-vue/dist/antd.css'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import {
   Button,

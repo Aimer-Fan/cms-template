@@ -85,6 +85,7 @@ export default defineComponent({
     return () => (
       <Menu
         mode="inline"
+        theme="light"
         selectedKeys={selectedKeys.value}
         openKeys={openKeys.value}
         onOpenChange={handleOpenChange}

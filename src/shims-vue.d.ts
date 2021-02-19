@@ -4,7 +4,6 @@ declare module '*.vue' {
   export default component
 }
 declare module 'path';
-
 interface Window {
   monaco: any;
   require: any;
