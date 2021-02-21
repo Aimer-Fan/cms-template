@@ -16,5 +16,6 @@ export const TOGGLE_COLOR = 'color'
 export const TOGGLE_WEAK = 'weak'
 export const TOGGLE_MULTI_TAB = 'multi_tab'
 export const TOGGLE_FULL_LOADING = 'full_loading'
+export const TOGGLE_APPLICATION_THEME = 'application_theme'
 
 export const APP_LANGUAGE = 'app_language'

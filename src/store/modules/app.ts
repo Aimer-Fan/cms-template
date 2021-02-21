@@ -3,13 +3,15 @@ import { AppState } from '@/interface'
 import {
   TOGGLE_DEVICE,
   TOGGLE_COLLAPSED,
-  TOGGLE_FULL_LOADING
+  TOGGLE_FULL_LOADING,
+  TOGGLE_APPLICATION_THEME
 } from '../mutation-types'
 
 const state: AppState = {
   device: 'desktop',
   collapsed: false,
-  loading: false
+  loading: false,
+  theme: 'light'
 }
 
 const user: Module<AppState, any> = {
@@ -24,6 +26,13 @@ const user: Module<AppState, any> = {
     },
     [TOGGLE_FULL_LOADING]: (state, loading) => {
       state.loading = loading
+    },
+    [TOGGLE_APPLICATION_THEME]: (state, theme) => {
+      state.theme = theme
+      const doms = document.getElementsByTagName('html')
+      Array.from(doms).forEach(dom => {
+        dom.dataset.theme = theme
+      })
     }
   },
 
@@ -34,13 +43,18 @@ const user: Module<AppState, any> = {
 
     [TOGGLE_FULL_LOADING] (context, loading) {
       context.commit(TOGGLE_FULL_LOADING, loading)
+    },
+
+    [TOGGLE_APPLICATION_THEME] (context, theme) {
+      context.commit(TOGGLE_APPLICATION_THEME, theme)
     }
   },
 
   getters: {
     collapsed: state => state.collapsed,
     device: state => state.device,
-    loading: state => state.loading
+    loading: state => state.loading,
+    theme: state => state.theme
   }
 }
 

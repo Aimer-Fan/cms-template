@@ -18,4 +18,5 @@ export interface AppState {
   device: string;
   collapsed: boolean;
   loading: boolean;
+  theme: 'light' | 'dark';
 }

@@ -8,12 +8,12 @@
     >
       <a-form-item label="username">
         <a-input v-model:value="ruleForm.username" placeholder="input username">
-          <template #prefix><UserOutlined style="color:rgba(0,0,0,.25)"/></template>
+          <template #prefix><UserOutlined /></template>
         </a-input>
       </a-form-item>
       <a-form-item label="password">
         <a-input-password v-model:value="ruleForm.password" placeholder="input password" @keydown.enter="login">
-          <template #prefix><LockOutlined style="color:rgba(0,0,0,.25)"/></template>
+          <template #prefix><LockOutlined /></template>
         </a-input-password>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 14, offset: 6 }">

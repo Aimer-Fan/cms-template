@@ -1,26 +1,21 @@
 <template>
   <a-card>
-    <a-steps :current="current" class="mb-24">
-      <a-step v-for="step in steps" :key="step.title" :title="step.title"></a-step>
-    </a-steps>
+    <div class="mb-24">
+      <a-steps :current="current">
+        <a-step v-for="step in steps" :key="step.title" :title="step.title"></a-step>
+      </a-steps>
+    </div>
 
     <BasicForm ref="basicForm" v-show="current === 0"/>
     <RichEditor ref="richEditor" v-show="current === 1" class="mt-12"/>
     <Preview v-show="current === 2" :form-value="formValue" :rich-content="richContent"/>
 
     <div class="steps-action mt-12">
-      <a-button v-if="current > 0" class="mr-12" @click="prev">
-        上一步
-      </a-button>
-      <a-button v-if="current < steps.length - 1" type="primary" @click="next">
-        下一步
-      </a-button>
-      <a-button
-        v-if="current == steps.length - 1"
-        type="primary"
-      >
-        提交
-      </a-button>
+      <a-space>
+        <a-button v-if="current > 0" @click="prev">上一步</a-button>
+        <a-button v-if="current < steps.length - 1" type="primary" @click="next">下一步</a-button>
+        <a-button v-if="current == steps.length - 1" type="primary">提交</a-button>
+      </a-space>
     </div>
   </a-card>
 </template>

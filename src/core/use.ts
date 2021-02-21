@@ -22,7 +22,9 @@ import {
   Radio,
   Spin,
   Descriptions,
-  Table
+  Table,
+  Space,
+  ConfigProvider
 } from 'ant-design-vue'
 
 // 重置默认的 Loading 图标
@@ -54,5 +56,7 @@ export default {
     app.use(Spin)
     app.use(Descriptions)
     app.use(Table)
+    app.use(Space)
+    app.use(ConfigProvider)
   }
 }

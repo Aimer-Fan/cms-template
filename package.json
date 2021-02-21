@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "gulp && vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -46,6 +46,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0-0",
+    "gulp": "^4.0.2",
+    "gulp-less": "^4.0.1",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lodash-webpack-plugin": "^0.11.6",

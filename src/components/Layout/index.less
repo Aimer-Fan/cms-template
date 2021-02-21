@@ -8,15 +8,22 @@
   white-space: nowrap;
   overflow: hidden;
   .cms-global-title {
-    color: @text-color;
+    color: rgba(0, 0, 0, 0.85);
   }
   .logo {
     transition: 0.2s margin;
     height: 50%;
   }
 }
+[data-theme="dark"] .cms-global-logo {
+  height: 64px;
+  line-height: 64px;
+}
+[data-theme="dark"] .cms-global-title {
+  color: rgba(255, 255, 255, 0.85);
+}
 .cms-global-header {
-  padding: 0 15px;
+  padding: 0 15px!important;
   background: #fff;
   width: calc(100% - 200px);
   transition: width 0.2s;

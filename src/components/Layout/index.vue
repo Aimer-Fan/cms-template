@@ -2,7 +2,7 @@
   <a-layout>
     <a-layout-sider
       v-if="!isMobile"
-      theme="light"
+      :theme="theme"
       collapsible
       :trigger="null"
       :collapsed="collapsed"
@@ -34,7 +34,7 @@
       <Sider/>
     </a-drawer>
 
-    <a-layout theme="light" class="cms-right-side" :class="{ 'collapsed': collapsed }">
+    <a-layout :theme="theme" class="cms-right-side" :class="{ 'collapsed': collapsed }">
       <a-layout-header class="cms-global-header" :style="{ position: 'fixed', zIndex: 1, right: 0, top: 0 }">
         <GlobalHeader />
       </a-layout-header>
@@ -57,11 +57,12 @@ export default defineComponent({
   setup () {
     const store = useStore()
     const collapsed = computed(() => store.state.app.collapsed)
+    const theme = computed(() => store.getters.theme)
     const isMobile = computed(() => store.state.app.device === 'mobile')
     const toggleCollapsed = () => {
       store.dispatch('ToggleCollapsed', true)
     }
-    return { isMobile, collapsed, toggleCollapsed }
+    return { isMobile, collapsed, theme, toggleCollapsed }
   }
 })
 </script>

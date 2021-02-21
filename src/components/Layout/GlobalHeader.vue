@@ -3,8 +3,14 @@
     <MenuUnfoldOutlined v-if="collapsed" class="icon cup" @click="toggleCollapsed(false)"/>
     <MenuFoldOutlined v-else class="icon cup" @click="toggleCollapsed(true)"/>
     <div class="fr cms-header">
-      <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen" title="退出全屏" @click="fullScreen"/>
-      <FullscreenOutlined class="mr-12 icon" v-else title="全屏" @click="fullScreen"/>
+      <div>
+        <AlertOutlined v-if="theme === 'dark'" class="mr-12 icon cup" @click="changeTheme('light')" />
+        <AlertFilled v-if="theme === 'light'" class="mr-12 icon cup" @click="changeTheme('dark')" />
+      </div>
+      <div>
+        <FullscreenExitOutlined class="mr-12 icon" v-if="isFullScreen" title="退出全屏" @click="fullScreen"/>
+        <FullscreenOutlined class="mr-12 icon" v-else title="全屏" @click="fullScreen"/>
+      </div>
       <a-dropdown :trigger="['hover']">
         <img :src="avatar" class="avatar mr-6">
         <template #overlay>
@@ -31,12 +37,15 @@ import {
   FullscreenOutlined,
   FullscreenExitOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  AlertOutlined,
+  AlertFilled
 } from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { message, Modal, notification } from 'ant-design-vue'
 import screenfull from 'screenfull'
+import { TOGGLE_APPLICATION_THEME } from '@/store/mutation-types'
 
 function logoutFn () {
   const store = useStore()
@@ -110,7 +119,9 @@ export default defineComponent({
     FullscreenOutlined,
     FullscreenExitOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined
+    MenuUnfoldOutlined,
+    AlertOutlined,
+    AlertFilled
   },
   setup () {
     const store = useStore()
@@ -119,13 +130,20 @@ export default defineComponent({
       store.dispatch('ToggleCollapsed', collapsed)
     }
     const collapsed = computed(() => store.state.app.collapsed)
+    const theme = computed(() => store.getters.theme)
+    const changeTheme = (theme: 'light'|'dark') => {
+      console.log('clicked')
+      store.dispatch(TOGGLE_APPLICATION_THEME, theme)
+    }
     return {
       ...logoutFn(),
       ...fullScreenFn(),
       ...router2User(),
+      changeTheme,
       avatar,
       toggleCollapsed,
-      collapsed
+      collapsed,
+      theme
     }
   }
 })

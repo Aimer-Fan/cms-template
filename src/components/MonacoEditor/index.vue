@@ -37,7 +37,7 @@ export default defineComponent({
     onMounted(() => {
       if (container.value && !instance) {
         const { language, theme, readOnly, value } = props
-        const instance = monaco.editor.create(container.value, {
+        instance = monaco.editor.create(container.value, {
           automaticLayout: true,
           mouseWheelZoom: true,
           theme,
