@@ -1,3 +1,4 @@
+import monaco from 'monaco-editor'
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
@@ -5,6 +6,6 @@ declare module '*.vue' {
 }
 declare module 'path';
 interface Window {
-  monaco: any;
+  monaco: monaco;
   require: any;
 }

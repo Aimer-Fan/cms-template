@@ -45,7 +45,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { message, Modal, notification } from 'ant-design-vue'
 import screenfull from 'screenfull'
-import { TOGGLE_APPLICATION_THEME } from '@/store/mutation-types'
+import { TOGGLE_APPLICATION_THEME, TOGGLE_COLLAPSED } from '@/store/mutation-types'
 
 function logoutFn () {
   const store = useStore()
@@ -127,7 +127,7 @@ export default defineComponent({
     const store = useStore()
     const avatar = computed(() => store.state.user.avatar)
     const toggleCollapsed = (collapsed: boolean) => {
-      store.dispatch('ToggleCollapsed', collapsed)
+      store.dispatch(TOGGLE_COLLAPSED, collapsed)
     }
     const collapsed = computed(() => store.state.app.collapsed)
     const theme = computed(() => store.getters.theme)

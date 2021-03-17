@@ -2,14 +2,8 @@ import { asyncRouters } from '@/router/config'
 import { RouteRecordRaw } from 'vue-router'
 import { Module } from 'vuex'
 import { union } from 'lodash'
+import { PermissionModuleState } from '@/interface'
 
-interface PermissionState {
-  routers: Array<RouteRecordRaw>;
-}
-
-interface PermissionStore {
-  permission: PermissionState;
-}
 interface Role {
   name: string;
   permissions: Array<RouterPermission>;
@@ -20,7 +14,7 @@ interface RouterPermission {
   components: Array<string>;
 }
 
-const permissionState: PermissionState = {
+const state = {
   routers: []
 }
 
@@ -54,8 +48,8 @@ function getAuthorizedRouters (
   return authorizedRouters
 }
 
-const permission: Module<PermissionState, PermissionStore> = {
-  state: permissionState,
+const permission: Module<PermissionModuleState, any> = {
+  state,
   mutations: {
     SET_ROUTERS (state, routers) {
       state.routers = routers
@@ -63,7 +57,8 @@ const permission: Module<PermissionState, PermissionStore> = {
   },
   actions: {
     GenerateRouters (context, roles: Array<Role>) {
-      const routerPermissions = union(...roles.map(role => role.permissions))
+      const result = roles.map(role => role.permissions)
+      const routerPermissions = union(result[0])
       const authorizedRouters = getAuthorizedRouters(asyncRouters, routerPermissions)
       context.commit('SET_ROUTERS', authorizedRouters)
     }

@@ -1,5 +1,3 @@
-import genArr from '.'
-
 /**
  * @description 加载一个脚本
  * @author AimerFan
@@ -33,7 +31,7 @@ export function loadScript (src: string, callback: Function | undefined): void {
  * @param callback 回调函数，全部成功或者存在一个失败都会被调用，成功不携带参数，失败携带失败的地址
  */
 export function loadScriptList (srcList: Array<string>, callback: Function | undefined) {
-  const list = genArr(srcList.length, 0)
+  const list = new Array(srcList.length).fill(0)
 
   const check = (index: number, hasError: boolean) => {
     list[index] = hasError ? -1 : 1

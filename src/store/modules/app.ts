@@ -1,20 +1,23 @@
+import { AppModuleState } from '@/interface'
+import ls from '@/utils/ls'
 import { Module } from 'vuex'
-import { AppState } from '@/interface'
+
 import {
   TOGGLE_DEVICE,
   TOGGLE_COLLAPSED,
   TOGGLE_FULL_LOADING,
-  TOGGLE_APPLICATION_THEME
+  TOGGLE_APPLICATION_THEME,
+  THEME
 } from '../mutation-types'
 
-const state: AppState = {
+const state: AppModuleState = {
   device: 'desktop',
   collapsed: false,
   loading: false,
   theme: 'light'
 }
 
-const user: Module<AppState, any> = {
+const user: Module<AppModuleState, any> = {
   state: state,
 
   mutations: {
@@ -33,11 +36,12 @@ const user: Module<AppState, any> = {
       Array.from(doms).forEach(dom => {
         dom.dataset.theme = theme
       })
+      ls.set(THEME, theme)
     }
   },
 
   actions: {
-    ToggleCollapsed (context, collapsed) {
+    [TOGGLE_COLLAPSED] (context, collapsed) {
       context.commit(TOGGLE_COLLAPSED, collapsed)
     },
 

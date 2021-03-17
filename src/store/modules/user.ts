@@ -1,17 +1,17 @@
 import { login, logout, getUserInfo } from '@/api/login'
 import { Module } from 'vuex'
-import { UserState } from '@/interface'
 import ls from '@/utils/ls'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { UserModuleState } from '@/interface'
 
-const state: UserState = {
+const state = {
   name: '',
   avatar: '',
   token: '',
   roles: []
 }
 
-const user: Module<UserState, any> = {
+const user: Module<UserModuleState, any> = {
   state: state,
 
   mutations: {
@@ -39,7 +39,7 @@ const user: Module<UserState, any> = {
 
     async GetUserInfo (context, token: string) {
       const response = await getUserInfo(token)
-      const userInfo: UserState = response.data
+      const userInfo: UserModuleState = response.data
       context.commit('SET_NAME', userInfo.name)
       context.commit('SET_TOKEN', userInfo.token)
       context.commit('SET_AVATAR', userInfo.avatar)

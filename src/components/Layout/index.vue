@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts">
+import { TOGGLE_COLLAPSED } from '@/store/mutation-types'
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import GlobalHeader from './GlobalHeader.vue'
@@ -60,7 +61,7 @@ export default defineComponent({
     const theme = computed(() => store.getters.theme)
     const isMobile = computed(() => store.state.app.device === 'mobile')
     const toggleCollapsed = () => {
-      store.dispatch('ToggleCollapsed', true)
+      store.dispatch(TOGGLE_COLLAPSED, true)
     }
     return { isMobile, collapsed, theme, toggleCollapsed }
   }
