@@ -6,7 +6,7 @@ import store from './store'
 
 import './styles/reset.less'
 import './styles/index.less'
-import './styles/antd.css'
+import '../antd.css'
 import '../mock/index'
 import './permission'
 

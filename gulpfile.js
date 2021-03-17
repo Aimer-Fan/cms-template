@@ -44,7 +44,7 @@ function generateAntdCss () {
       })
     }))
     // 输出到指定的文件夹下
-    .pipe(gulp.dest('src/styles'))
+    .pipe(gulp.dest('./'))
 }
 
 /**
@@ -54,7 +54,7 @@ function generateAntdCss () {
  */
 async function defaultTask () {
   // 如果文件已存在就不再打包
-  stat('src/styles/antd.css', function (err) {
+  stat('./antd.css', function (err) {
     if (err) {
       generateAntdCss()
     }

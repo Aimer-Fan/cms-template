@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "gulp && vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "gulp && vue-cli-service build",
+    "lint": "gulp && vue-cli-service lint"
   },
   "gitHooks": {
     "commit-msg": "node scripts/pre-commit.ts"
