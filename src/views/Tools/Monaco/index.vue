@@ -26,15 +26,26 @@
 
 <script lang="ts">
 import MonacoEditor from '@/components/MonacoEditor/index.vue'
+import { useStore } from 'vuex'
+import { defineComponent, ref, watch } from 'vue'
 
-import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'Monaco',
   components: { MonacoEditor },
   setup () {
     const language = ref<string>('javascript')
-    const theme = ref<string>('vs')
+    const store = useStore()
+    const defaultTheme = store.getters.theme
+    const targetTheme = defaultTheme === 'dark' ? 'vs-dark' : 'vs'
+
+    const theme = ref<string>(targetTheme)
     const value = ref<string>('"hello monaco"')
+
+    watch(() => store.state.app.theme, value => {
+      const targetTheme = value === 'dark' ? 'vs-dark' : 'vs'
+      theme.value = targetTheme
+    })
+
     return { language, theme, value }
   }
 })

@@ -49,7 +49,7 @@
 import { TOGGLE_COLLAPSED } from '@/store/mutation-types'
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import GlobalHeader from './GlobalHeader.vue'
+import GlobalHeader from './GlobalHeader'
 import Sider from './Sider.vue'
 
 export default defineComponent({

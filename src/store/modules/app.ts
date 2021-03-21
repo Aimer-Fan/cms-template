@@ -32,10 +32,6 @@ const user: Module<AppModuleState, any> = {
     },
     [TOGGLE_APPLICATION_THEME]: (state, theme) => {
       state.theme = theme
-      const doms = document.getElementsByTagName('html')
-      Array.from(doms).forEach(dom => {
-        dom.dataset.theme = theme
-      })
       ls.set(THEME, theme)
     }
   },
@@ -50,6 +46,10 @@ const user: Module<AppModuleState, any> = {
     },
 
     [TOGGLE_APPLICATION_THEME] (context, theme) {
+      const doms = document.getElementsByTagName('html')
+      Array.from(doms).forEach(dom => {
+        dom.dataset.theme = theme
+      })
       context.commit(TOGGLE_APPLICATION_THEME, theme)
     }
   },

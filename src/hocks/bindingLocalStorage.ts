@@ -9,6 +9,6 @@ export default function () {
     store.commit('SET_TOKEN', ls.get(ACCESS_TOKEN))
     store.commit('SET_NAME', ls.get(USER_NAME))
     store.commit('SET_AVATAR', ls.get(USER_AVATAR))
-    store.commit(TOGGLE_APPLICATION_THEME, ls.get(THEME) || 'dark')
+    store.dispatch(TOGGLE_APPLICATION_THEME, ls.get(THEME) || 'dark')
   })
 }
