@@ -2,7 +2,7 @@
   <a-layout>
     <a-layout-sider
       v-if="!isMobile"
-      :theme="theme"
+      theme="dark"
       collapsible
       :trigger="null"
       :collapsed="collapsed"
@@ -28,7 +28,7 @@
       <div class="cms-global-logo">
         <router-link to="/">
           <img src="@/assets/logo.png" class="logo"/>
-          <span class="ml-12 cms-global-title">CMS Template</span>
+          <span class="ml-12 cms-global-title-mobile">CMS Template</span>
         </router-link>
       </div>
       <Sider/>

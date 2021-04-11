@@ -1,13 +1,16 @@
 .cms-global-logo {
-  height: 60px;
+  height: 64px;
   font-size: 18px;
   box-shadow: 0px 1px 4px #eeeeee;
-  line-height: 60px;
+  line-height: 64px;
   text-align: center;
   font-weight: 450;
   white-space: nowrap;
   overflow: hidden;
   .cms-global-title {
+    color: white;
+  }
+  .cms-global-title-mobile {
     color: rgba(0, 0, 0, 0.85);
   }
   .logo {
@@ -15,13 +18,10 @@
     height: 50%;
   }
 }
-[data-theme="dark"] .cms-global-logo {
-  height: 64px;
-  line-height: 64px;
+[data-theme="dark"] .cms-global-title-mobile {
+  color: #fff;
 }
-[data-theme="dark"] .cms-global-title {
-  color: rgba(255, 255, 255, 0.85);
-}
+
 .cms-global-header {
   padding: 0 15px 0 0!important;
   background: #fff;
@@ -39,6 +39,7 @@
     margin-left: 25px;
   }
 }
+
 .cms-right-side {
   margin-left: 200px;
   transition: margin 0.2s;

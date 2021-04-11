@@ -39,7 +39,7 @@ export default defineComponent({
 
 <style scoped lang="less">
 .collapsed-switch-wrap {
-  padding: 0 6px;
+  padding: 0 24px;
   cursor: pointer;
   .icon {
     font-size: 18px;

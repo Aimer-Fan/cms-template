@@ -61,6 +61,7 @@ export default defineComponent({
     const routers = computed(() => store.state.permission.routers)
     const menuRouters = computed(() => routers.value[0].children)
     const selectedKeys = computed(() => [router.currentRoute.value.fullPath])
+    const device = computed(() => store.state.app.device)
     const openKeys = ref<Array<string>>([])
     let cachedOpenKeys: Array<string> = []
     const handleOpenChange = (keys: Array<string>) => { openKeys.value = keys }
@@ -85,7 +86,7 @@ export default defineComponent({
     return () => (
       <Menu
         mode="inline"
-        theme="light"
+        theme={ device.value === 'mobile' ? 'light' : 'dark' }
         selectedKeys={selectedKeys.value}
         openKeys={openKeys.value}
         onOpenChange={handleOpenChange}
