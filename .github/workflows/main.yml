@@ -11,9 +11,9 @@ on:
     branches: [ master ]
 
 env:
-  REGISTRY: registry.cn-beijing.aliyuncs.com
-  NAMESPACE: aimer-fan
-  IMAGE: cms-template
+  REGISTRY: ${{ secrets.REGISTRY }}
+  NAMESPACE: ${{ secrets.NAMESPACE }}
+  IMAGE: ${{ secrets.IMAGE }}
   TAG: ${{ github.sha }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
