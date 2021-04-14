@@ -3,6 +3,7 @@ module.exports = {
     '@vue/cli-plugin-babel/preset'
   ],
   plugins: [
-    'lodash'
+    'lodash',
+    ['import', { libraryName: 'ant-design-vue', libraryDirectory: 'es', style: 'css' }]
   ]
 }
