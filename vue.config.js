@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 // const { getThemeVariables } = require('ant-design-vue/dist/theme')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
     plugins: [
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new LodashModuleReplacementPlugin(),
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
       // new CompressionPlugin({
       //   algorithm: 'gzip'
       // }),
