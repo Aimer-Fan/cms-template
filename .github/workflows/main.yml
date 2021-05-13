@@ -12,7 +12,6 @@ env:
   REGISTRY: ${{ secrets.REGISTRY }}
   NAMESPACE: ${{ secrets.NAMESPACE }}
   IMAGE: ${{ secrets.IMAGE }}
-  TAG: ${GITHUB_REF##*/}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -48,5 +47,6 @@ jobs:
 
       - name: Build and push Docker images
         run: |
+          TAG=${GITHUB_REF##*/}
           docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:$TAG" .
           docker push "$REGISTRY/$NAMESPACE/$IMAGE:$TAG"
