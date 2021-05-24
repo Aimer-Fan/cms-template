@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx
 
 RUN mkdir -p /workspace/web
 
