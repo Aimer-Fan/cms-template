@@ -5,10 +5,9 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionPlugin = require('compression-webpack-plugin')
-const publicPath = process.env.PUBLIC_PATH || '/'
 
 module.exports = {
-  publicPath: publicPath,
+  publicPath: '/cms-template/',
   devServer: {
     port: 4396,
     // compress: true,
