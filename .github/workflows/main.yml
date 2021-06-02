@@ -34,6 +34,7 @@ jobs:
       # Build project
       - name: node build
         run: |
+          export PUBLIC_PATH=/cms-template/
           npm install
           npm run build
           

@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
+import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from 'vue'
 import * as monaco from 'monaco-editor'
+import { Theme } from './index'
 
 /**
  * @description 基于 Monaco 编辑器的二次封装 https://github.com/microsoft/monaco-editor
@@ -15,7 +16,7 @@ export default defineComponent({
   name: 'MonacoEditor',
   props: {
     language: { type: String, default: 'text' },
-    theme: { type: String, default: 'vs' },
+    theme: { type: String as PropType<Theme>, default: 'vs' },
     readOnly: { type: Boolean, default: false },
     value: { type: String, default: '' }
   },

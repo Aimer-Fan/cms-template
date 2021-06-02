@@ -32,13 +32,14 @@
  * @author AimerFan
  * @date 2021/02/10
 */
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
+import { FormState } from './index'
 
 export default defineComponent({
   name: 'Preview',
   props: {
     richContent: { type: String, default: '' },
-    formValue: { type: Object, default: () => ({}) }
+    formValue: { type: Object as PropType<FormState>, default: () => ({}) }
   }
 })
 </script>
