@@ -29,7 +29,7 @@ import {
   ExclamationCircleOutlined
 } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { Modal, notification } from 'ant-design-vue'
 
 function logoutFn () {

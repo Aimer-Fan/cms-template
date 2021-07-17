@@ -16,7 +16,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons-vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { TOGGLE_COLLAPSED } from '@/store/mutation-types'
 
 export default defineComponent({

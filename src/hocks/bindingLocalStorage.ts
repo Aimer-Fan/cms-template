@@ -1,7 +1,7 @@
 import { ACCESS_TOKEN, USER_AVATAR, USER_NAME, THEME, TOGGLE_APPLICATION_THEME } from '@/store/mutation-types'
 import ls from '@/utils/ls'
 import { onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 
 export default function () {
   const store = useStore()

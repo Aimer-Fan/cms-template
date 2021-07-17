@@ -1,6 +1,6 @@
-import { AppModuleState } from '@/interface'
 import ls from '@/utils/ls'
 import { Module } from 'vuex'
+import { RootStoreTypes } from '../interface'
 
 import {
   TOGGLE_DEVICE,
@@ -10,14 +10,23 @@ import {
   THEME
 } from '../mutation-types'
 
+export interface AppModuleState {
+  device: 'desktop' | 'tablet' | 'mobile';
+  collapsed: boolean;
+  loading: boolean;
+  theme: 'light' | 'dark';
+  local: string;
+}
+
 const state: AppModuleState = {
   device: 'desktop',
   collapsed: false,
   loading: false,
-  theme: 'light'
+  theme: 'light',
+  local: 'zh-CN'
 }
 
-const user: Module<AppModuleState, any> = {
+const user: Module<AppModuleState, RootStoreTypes> = {
   state: state,
 
   mutations: {

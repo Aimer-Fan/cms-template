@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/enquire.js": "^2.1.2",
+    "@types/jest": "^26.0.24",
     "@types/mockjs": "^1.0.3",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",

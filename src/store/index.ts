@@ -1,23 +1,22 @@
-import { createStore } from 'vuex'
-// import getters from './getters'
+import { InjectionKey } from 'vue'
+import { createStore, Store, useStore as baseUseStore } from 'vuex'
 
-import user from './modules/user'
 import app from './modules/app'
+import user from './modules/user'
 import permission from './modules/permission'
-import { UserModuleState, AppModuleState, PermissionModuleState } from '@/interface'
-interface AppStore {
-  user: UserModuleState;
-  app: AppModuleState;
-  permission: PermissionModuleState;
+import { RootStoreTypes } from './interface'
+
+export const key: InjectionKey<Store<{}>> = Symbol('vue-store')
+
+export function useStore<T = RootStoreTypes> () {
+  return baseUseStore<T>(key)
 }
 
-const store = createStore<AppStore>({
+export default createStore<RootStoreTypes>({
   devtools: true,
   modules: {
-    user,
     app,
+    user,
     permission
   }
 })
-
-export default store

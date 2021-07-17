@@ -48,7 +48,7 @@
 <script lang="ts">
 import { TOGGLE_COLLAPSED } from '@/store/mutation-types'
 import { computed, defineComponent } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import GlobalHeader from './GlobalHeader'
 import Sider from './Sider.vue'
 

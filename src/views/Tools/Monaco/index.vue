@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import MonacoEditor from '@/components/MonacoEditor/index.vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({

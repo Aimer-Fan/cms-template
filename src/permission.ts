@@ -7,7 +7,7 @@ import store from '@/store'
 const whiteList = ['/login']
 
 router.beforeEach(async (to, from, next) => {
-  const token = store.getters.token
+  const token = store.state.user.token
   NProgress.start()
   if (token) {
     if (to.path === '/login') {

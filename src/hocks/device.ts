@@ -1,6 +1,6 @@
 import { deviceEnquire, DEVICE_TYPE } from '@/utils/device'
 import { computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { TOGGLE_COLLAPSED, TOGGLE_DEVICE } from '@/store/mutation-types'
 
 export default function () {

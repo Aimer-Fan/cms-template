@@ -2,7 +2,10 @@ import { asyncRouters } from '@/router/config'
 import { RouteRecordRaw } from 'vue-router'
 import { Module } from 'vuex'
 import { union } from 'lodash'
-import { PermissionModuleState } from '@/interface'
+import { RootStoreTypes } from '../interface'
+export interface PermissionModuleState {
+  routers: Array<RouteRecordRaw>;
+}
 
 interface Role {
   name: string;
@@ -48,7 +51,7 @@ function getAuthorizedRouters (
   return authorizedRouters
 }
 
-const permission: Module<PermissionModuleState, any> = {
+const permission: Module<PermissionModuleState, RootStoreTypes> = {
   state,
   mutations: {
     SET_ROUTERS (state, routers) {

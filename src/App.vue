@@ -12,7 +12,7 @@
 import { computed, defineComponent } from 'vue'
 import deviceHock from '@/hocks/device'
 import bindingLocalStorage from '@/hocks/bindingLocalStorage'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 
 import locale from 'ant-design-vue/es/locale/zh_CN'
 

@@ -1,9 +1,8 @@
-import { ResponseBody } from '@/interface'
 import request from '@/utils/request'
 
-export const GetLineData = (): Promise<ResponseBody> => {
+export const GetLineData = (): Promise<any> => {
   return request.post('/GetLineData')
 }
-export const GetCardsData = (): Promise<ResponseBody> => {
+export const GetCardsData = (): Promise<any> => {
   return request.post('/GetCardsData')
 }

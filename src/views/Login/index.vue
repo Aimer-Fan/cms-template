@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import router from '@/router'
 import { notification } from 'ant-design-vue'
 

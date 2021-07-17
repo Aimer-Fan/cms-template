@@ -16,7 +16,7 @@ import {
   BulbFilled
 } from '@ant-design/icons-vue'
 
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { computed, defineComponent } from 'vue'
 import { TOGGLE_APPLICATION_THEME } from '@/store/mutation-types'
 

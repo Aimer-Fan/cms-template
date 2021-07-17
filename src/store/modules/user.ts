@@ -2,7 +2,13 @@ import { login, logout, getUserInfo } from '@/api/login'
 import { Module } from 'vuex'
 import ls from '@/utils/ls'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { UserModuleState } from '@/interface'
+import { RootStoreTypes } from '../interface'
+export interface UserModuleState {
+  name: string;
+  avatar: string;
+  token: string;
+  roles: Array<any>;
+}
 
 const state = {
   name: '',
@@ -11,7 +17,7 @@ const state = {
   roles: []
 }
 
-const user: Module<UserModuleState, any> = {
+const user: Module<UserModuleState, RootStoreTypes> = {
   state: state,
 
   mutations: {

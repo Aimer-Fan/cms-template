@@ -61,7 +61,7 @@
  * @date 2021/02/08
 */
 import { defineComponent, reactive, ref, UnwrapRef } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { FormState } from './index'
 
 /**

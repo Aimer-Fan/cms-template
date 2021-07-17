@@ -2,7 +2,6 @@ import { App, h } from 'vue'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import {
   Button,
-  Icon,
   Form,
   Input,
   Layout,
@@ -35,7 +34,6 @@ Spin.setDefaultIndicator({
 export default {
   install (app: App) {
     app.use(Button)
-    app.use(Icon)
     app.use(Form)
     app.use(Input)
     app.use(Layout)

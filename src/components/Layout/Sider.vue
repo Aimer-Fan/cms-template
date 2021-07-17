@@ -1,11 +1,12 @@
 <script lang="tsx">
-import { h, computed, defineComponent, ref, watch } from 'vue'
-import path from 'path'
-import { useStore } from 'vuex'
+import { h, computed, defineComponent, watch } from 'vue'
+// import path from 'path'
+import { useStore } from '@/store'
 import { RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
 import { isExternal } from '@/utils/validate'
 import router from '@/router'
+import { resolve } from '@/utils/path'
 
 const resolvePath = (basePath: string, routePath: string): string => {
   if (isExternal(routePath)) {
@@ -14,7 +15,7 @@ const resolvePath = (basePath: string, routePath: string): string => {
   if (isExternal(basePath)) {
     return basePath
   }
-  return path.resolve(basePath, routePath)
+  return resolve(basePath, routePath)
 }
 
 function generateIcon (icon: any) {
@@ -62,15 +63,15 @@ export default defineComponent({
     const menuRouters = computed(() => routers.value[0].children)
     const selectedKeys = computed(() => [router.currentRoute.value.fullPath])
     const device = computed(() => store.state.app.device)
-    const openKeys = ref<Array<string>>([])
+    let openKeys: Array<string> = []
     let cachedOpenKeys: Array<string> = []
-    const handleOpenChange = (keys: Array<string>) => { openKeys.value = keys }
+
     watch(() => store.getters.collapsed, (value) => {
       if (value) {
-        cachedOpenKeys = openKeys.value.concat()
-        openKeys.value = []
+        cachedOpenKeys = openKeys.concat()
+        openKeys = []
       } else {
-        openKeys.value = cachedOpenKeys
+        openKeys = cachedOpenKeys
       }
     })
     watch(router.currentRoute, (currentRoute) => {
@@ -80,7 +81,7 @@ export default defineComponent({
         if (mactchedPath.length > 1) {
           mactchedPath.shift()
         }
-        openKeys.value = mactchedPath
+        openKeys = mactchedPath
       }
     }, { immediate: true })
     return () => (
@@ -88,10 +89,9 @@ export default defineComponent({
         mode="inline"
         theme={ device.value === 'mobile' ? 'light' : 'dark' }
         selectedKeys={selectedKeys.value}
-        openKeys={openKeys.value}
-        onOpenChange={handleOpenChange}
+        v-model={[openKeys, 'openKeys']}
       >
-        {generateMenu(menuRouters.value)}
+        {generateMenu(menuRouters.value || [])}
       </Menu>
     )
   }

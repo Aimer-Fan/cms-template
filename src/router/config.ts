@@ -1,4 +1,3 @@
-// import { defineAsyncComponent } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import Layout from '@/components/Layout/index.vue'
 import BlankLayout from '@/components/Layout/BlankLayout.vue'
