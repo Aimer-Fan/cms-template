@@ -2,6 +2,7 @@ export const ACCESS_TOKEN = 'Access-Token'
 export const USER_NAME = 'User-Name'
 export const USER_AVATAR = 'User-Avatar'
 export const THEME = 'theme'
+export const TOGGLE_LOCAL = 'local'
 
 export const SIDEBAR_TYPE = 'sidebar_type'
 export const TOGGLE_MOBILE_TYPE = 'is_mobile'

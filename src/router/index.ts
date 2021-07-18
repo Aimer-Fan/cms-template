@@ -10,12 +10,12 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/Login/index.vue')
+      component: () => import(/* webpackChunkName: "base" */'@/views/Login/index.vue')
     },
     {
       path: '/404',
       name: '/404',
-      component: () => import('@/views/Error/404.vue')
+      component: () => import(/* webpackChunkName: "base" */'@/views/Error/404.vue')
     }
   ]
 })

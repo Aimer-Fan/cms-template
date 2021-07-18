@@ -20,7 +20,7 @@ export const asyncRouters: Array<RouteRecordRaw> = [
         path: 'dashboard',
         name: 'Dashboard',
         meta: { title: '仪表盘', icon: DashboardOutlined, permission: ['dashboard'] },
-        component: () => import('@/views/Dashboard/index.vue')
+        component: () => import(/* webpackChunkName: "dashboard" */'@/views/Dashboard/index.vue')
       },
       {
         path: 'basic',
@@ -32,13 +32,13 @@ export const asyncRouters: Array<RouteRecordRaw> = [
             path: 'basic-form',
             name: 'basicForm',
             meta: { title: '基本表单', permission: ['basic'] },
-            component: () => import('@/views/Basic/BasicForm/index.vue')
+            component: () => import(/* webpackChunkName: "baseform" */'@/views/Basic/BasicForm/index.vue')
           },
           {
             path: 'basic-table',
             name: 'basicTable',
             meta: { title: '基本表格', permission: ['basic'] },
-            component: () => import('@/views/Basic/BasicTable/index.vue')
+            component: () => import(/* webpackChunkName: "baseform" */'@/views/Basic/BasicTable/index.vue')
           }
         ]
       },
@@ -52,13 +52,13 @@ export const asyncRouters: Array<RouteRecordRaw> = [
             path: 'monaco-editor',
             name: 'MonacoEditor',
             meta: { title: '代码编辑器', permission: ['tools'] },
-            component: () => import('@/views/Tools/Monaco/index.vue')
+            component: () => import(/* webpackChunkName: "tools" */'@/views/Tools/Monaco/index.vue')
           },
           {
             path: 'rich-editor',
             name: 'RichEditor',
             meta: { title: '富文本编辑器', permission: ['tools'] },
-            component: () => import('@/views/Tools/RichEditor/index.vue')
+            component: () => import(/* webpackChunkName: "tools" */'@/views/Tools/RichEditor/index.vue')
           }
         ]
       },
@@ -66,7 +66,7 @@ export const asyncRouters: Array<RouteRecordRaw> = [
         path: 'user',
         name: 'user',
         meta: { title: '个人中心', icon: UserOutlined, permission: ['user'] },
-        component: () => import('@/views/User/index.vue')
+        component: () => import(/* webpackChunkName: "user" */'@/views/User/index.vue')
       },
       {
         path: 'error',
@@ -78,19 +78,19 @@ export const asyncRouters: Array<RouteRecordRaw> = [
             path: '403',
             name: '403',
             meta: { title: '403', permission: ['error'] },
-            component: () => import('@/views/Error/403.vue')
+            component: () => import(/* webpackChunkName: "err" */'@/views/Error/403.vue')
           },
           {
             path: '404',
             name: '404',
             meta: { title: '404', permission: ['error'] },
-            component: () => import('@/views/Error/404.vue')
+            component: () => import(/* webpackChunkName: "err" */'@/views/Error/404.vue')
           },
           {
             path: '500',
             name: '500',
             meta: { title: '500', permission: ['error'] },
-            component: () => import('@/views/Error/500.vue')
+            component: () => import(/* webpackChunkName: "err" */'@/views/Error/500.vue')
           }
         ]
       }
@@ -106,11 +106,11 @@ export const constantRouters: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login/index.vue')
+    component: () => import(/* webpackChunkName: "base" */'@/views/Login/index.vue')
   },
   {
     path: '/404',
     name: '/404',
-    component: () => import('@/views/Error/404.vue')
+    component: () => import(/* webpackChunkName: "base" */'@/views/Error/404.vue')
   }
 ]

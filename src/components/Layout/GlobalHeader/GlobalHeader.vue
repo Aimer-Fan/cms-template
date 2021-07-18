@@ -2,6 +2,7 @@
   <div class="global-header-wrap">
     <CollapsedSwitch />
     <div class="fr cms-header">
+      <LocalSelect />
       <ThemeSwitch />
       <FullScreen />
       <UserInfo />
@@ -11,6 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import LocalSelect from './LocalSelect'
 import ThemeSwitch from './ThemeSwitch'
 import CollapsedSwitch from './CollapsedSwitch'
 import FullScreen from './FullScreen'
@@ -24,6 +26,7 @@ import UserInfo from './UserInfo'
 export default defineComponent({
   name: 'GlobalHeader',
   components: {
+    LocalSelect,
     ThemeSwitch,
     CollapsedSwitch,
     FullScreen,

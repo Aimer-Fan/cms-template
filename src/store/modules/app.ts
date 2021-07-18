@@ -7,7 +7,8 @@ import {
   TOGGLE_COLLAPSED,
   TOGGLE_FULL_LOADING,
   TOGGLE_APPLICATION_THEME,
-  THEME
+  THEME,
+  TOGGLE_LOCAL
 } from '../mutation-types'
 
 export interface AppModuleState {
@@ -42,6 +43,10 @@ const user: Module<AppModuleState, RootStoreTypes> = {
     [TOGGLE_APPLICATION_THEME]: (state, theme) => {
       state.theme = theme
       ls.set(THEME, theme)
+    },
+    [TOGGLE_LOCAL]: (state, local) => {
+      state.local = local
+      ls.set(TOGGLE_LOCAL, local)
     }
   },
 
@@ -60,6 +65,10 @@ const user: Module<AppModuleState, RootStoreTypes> = {
         dom.dataset.theme = theme
       })
       context.commit(TOGGLE_APPLICATION_THEME, theme)
+    },
+
+    [TOGGLE_LOCAL] (context, local) {
+      context.commit(TOGGLE_LOCAL, local)
     }
   },
 
@@ -67,7 +76,8 @@ const user: Module<AppModuleState, RootStoreTypes> = {
     collapsed: state => state.collapsed,
     device: state => state.device,
     loading: state => state.loading,
-    theme: state => state.theme
+    theme: state => state.theme,
+    local: state => state.local
   }
 }
 
