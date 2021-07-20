@@ -19,25 +19,25 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        meta: { title: '仪表盘', icon: DashboardOutlined, permission: ['dashboard'] },
+        meta: { title: 'dashboard', icon: DashboardOutlined, permission: ['dashboard'] },
         component: () => import(/* webpackChunkName: "dashboard" */'@/views/Dashboard/index.vue')
       },
       {
         path: 'basic',
         name: 'basic',
-        meta: { title: '基本元素', icon: TableOutlined, permission: ['basic'] },
+        meta: { title: 'basicElement', icon: TableOutlined, permission: ['basic'] },
         component: async () => BlankLayout,
         children: [
           {
             path: 'basic-form',
             name: 'basicForm',
-            meta: { title: '基本表单', permission: ['basic'] },
+            meta: { title: 'basicForm', permission: ['basic'] },
             component: () => import(/* webpackChunkName: "baseform" */'@/views/Basic/BasicForm/index.vue')
           },
           {
             path: 'basic-table',
             name: 'basicTable',
-            meta: { title: '基本表格', permission: ['basic'] },
+            meta: { title: 'basicTable', permission: ['basic'] },
             component: () => import(/* webpackChunkName: "baseform" */'@/views/Basic/BasicTable/index.vue')
           }
         ]
@@ -45,33 +45,39 @@ export const asyncRouters: Array<RouteRecordRaw> = [
       {
         path: 'tools',
         name: 'tools',
-        meta: { title: '工具集', icon: ToolOutlined, permission: ['tools'] },
+        meta: { title: 'tools', icon: ToolOutlined, permission: ['tools'] },
         component: async () => BlankLayout,
         children: [
           {
             path: 'monaco-editor',
             name: 'MonacoEditor',
-            meta: { title: '代码编辑器', permission: ['tools'] },
+            meta: { title: 'codeEditor', permission: ['tools'] },
             component: () => import(/* webpackChunkName: "tools" */'@/views/Tools/Monaco/index.vue')
           },
           {
             path: 'rich-editor',
             name: 'RichEditor',
-            meta: { title: '富文本编辑器', permission: ['tools'] },
+            meta: { title: 'richEditor', permission: ['tools'] },
             component: () => import(/* webpackChunkName: "tools" */'@/views/Tools/RichEditor/index.vue')
+          },
+          {
+            path: 'others',
+            name: 'Others',
+            meta: { title: 'others', permission: ['tools'] },
+            component: () => import(/* webpackChunkName: "tools" */'@/views/Tools/Others/index.vue')
           }
         ]
       },
       {
         path: 'user',
         name: 'user',
-        meta: { title: '个人中心', icon: UserOutlined, permission: ['user'] },
+        meta: { title: 'userCenter', icon: UserOutlined, permission: ['user'] },
         component: () => import(/* webpackChunkName: "user" */'@/views/User/index.vue')
       },
       {
         path: 'error',
         name: 'error',
-        meta: { title: '错误页面', icon: WarningOutlined, permission: ['error'] },
+        meta: { title: 'errorPage', icon: WarningOutlined, permission: ['error'] },
         component: async () => BlankLayout,
         children: [
           {

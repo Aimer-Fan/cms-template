@@ -1,5 +1,5 @@
 <template>
-  <span class="theme-switch-wrap" :title="theme === 'dark' ? '默认模式' : '暗黑模式'" @click="changeTheme">
+  <span class="theme-switch-wrap" :title="theme === 'dark' ? t('defaultMode') : t('darkMode')" @click="changeTheme">
     <BulbOutlined v-if="theme === 'dark'" class="icon"/>
     <BulbFilled v-if="theme === 'light'" class="icon"/>
   </span>
@@ -19,6 +19,7 @@ import {
 import { useStore } from '@/store'
 import { computed, defineComponent } from 'vue'
 import { TOGGLE_APPLICATION_THEME } from '@/store/mutation-types'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'ThemeSwitch',
@@ -27,6 +28,7 @@ export default defineComponent({
     BulbFilled
   },
   setup () {
+    const { t } = useI18n()
     const store = useStore()
     const theme = computed(() => store.getters.theme)
     const changeTheme = () => {
@@ -34,7 +36,7 @@ export default defineComponent({
       store.dispatch(TOGGLE_APPLICATION_THEME, targetTheme)
     }
 
-    return { theme, changeTheme }
+    return { theme, changeTheme, t }
   }
 })
 </script>

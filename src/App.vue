@@ -14,7 +14,8 @@ import deviceHock from '@/hocks/device'
 import bindingLocalStorage from '@/hocks/bindingLocalStorage'
 import { useStore } from '@/store'
 
-import locale from 'ant-design-vue/es/locale/zh_CN'
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import en from 'ant-design-vue/es/locale/en_US'
 
 /**
  * @description 全局 Loading
@@ -36,6 +37,11 @@ export default defineComponent({
   name: 'App',
   setup () {
     bindingLocalStorage()
+    const store = useStore()
+    const locale = computed(() => {
+      const local = store.state.app.local
+      return local === 'zh-CN' ? zhCN : en
+    })
     return { ...deviceHock(), ...useFullLoading(), locale }
   }
 })

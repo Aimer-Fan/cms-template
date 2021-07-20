@@ -5,10 +5,10 @@
       <template #overlay>
         <a-menu theme="light">
           <a-menu-item key="0">
-            <span @click="router2User"><UserOutlined />个人中心</span>
+            <span @click="router2User"><UserOutlined />{{t('userCenter')}}</span>
           </a-menu-item>
           <a-menu-item key="1">
-            <span @click="logout"><LogoutOutlined />退出登录</span>
+            <span @click="logout"><LogoutOutlined />{{t('logout')}}</span>
           </a-menu-item>
         </a-menu>
       </template>
@@ -31,23 +31,23 @@ import {
 import { useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { Modal, notification } from 'ant-design-vue'
+import { useI18n } from 'vue-i18n'
 
 function logoutFn () {
   const store = useStore()
   const router = useRouter()
+  const { t } = useI18n()
   const Logout = () => store.dispatch('Logout')
   const logout = () => {
     const name = store.state.user.name
     Modal.confirm({
-      title: '确认登出吗？',
+      title: t('confirmLogout'),
       icon: createVNode(ExclamationCircleOutlined),
-      content: '此操作将会登出系统。',
-      okText: '确认',
-      cancelText: '取消',
+      content: t('logoutHelpMessage'),
       centered: true,
       onOk: () => {
         Logout()
-        notification.success({ message: `Goodbye ${name}`, description: 'Logout Successful!' })
+        notification.success({ message: t('goodbye', { name }), description: t('logoutSuccessful') })
         router.replace('/login')
       }
     })
@@ -69,9 +69,10 @@ export default defineComponent({
     UserOutlined
   },
   setup () {
+    const { t } = useI18n()
     const store = useStore()
     const avatar = computed(() => store.state.user.avatar)
-    return { avatar, ...routertoUser(), ...logoutFn() }
+    return { avatar, ...routertoUser(), ...logoutFn(), t }
   }
 })
 </script>

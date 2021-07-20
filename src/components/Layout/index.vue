@@ -11,7 +11,7 @@
       <div class="cms-global-logo">
         <router-link to="/">
           <img src="@/assets/logo.png" class="logo"/>
-          <span class="ml-12 cms-global-title">CMS Template</span>
+          <span class="ml-12 cms-global-title">Admin Template</span>
         </router-link>
       </div>
       <Sider />
@@ -28,7 +28,7 @@
       <div class="cms-global-logo">
         <router-link to="/">
           <img src="@/assets/logo.png" class="logo"/>
-          <span class="ml-12 cms-global-title-mobile">CMS Template</span>
+          <span class="ml-12 cms-global-title-mobile">Admin Template</span>
         </router-link>
       </div>
       <Sider/>
@@ -69,6 +69,5 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '~ant-design-vue/dist/antd.less';
 @import './index.less';
 </style>

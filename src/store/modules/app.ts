@@ -1,3 +1,4 @@
+import { toggleLocal } from '@/i18n'
 import ls from '@/utils/ls'
 import { Module } from 'vuex'
 import { RootStoreTypes } from '../interface'
@@ -47,6 +48,7 @@ const user: Module<AppModuleState, RootStoreTypes> = {
     [TOGGLE_LOCAL]: (state, local) => {
       state.local = local
       ls.set(TOGGLE_LOCAL, local)
+      toggleLocal(local)
     }
   },
 

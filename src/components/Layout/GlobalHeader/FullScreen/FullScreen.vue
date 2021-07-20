@@ -1,5 +1,5 @@
 <template>
-  <span class="full-screen-wrap" :title="isFullScreen ? '退出全屏' : '全屏'">
+  <span class="full-screen-wrap" :title="isFullScreen ? t('exitFullscreen') : t('fullscreen')">
     <FullscreenExitOutlined class="icon" v-if="isFullScreen" @click="fullScreen"/>
     <FullscreenOutlined class="icon" v-else @click="fullScreen"/>
   </span>
@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons-vue'
 import screenfull from 'screenfull'
 import { message } from 'ant-design-vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'FullScreen',
@@ -26,6 +27,7 @@ export default defineComponent({
     FullscreenExitOutlined
   },
   setup () {
+    const { t } = useI18n()
     const isFullScreen = ref(false)
     const change = () => {
       if (screenfull.isEnabled) {
@@ -51,7 +53,7 @@ export default defineComponent({
         message.warn('Sorry, your device did not support fullScreen function!')
       }
     }
-    return { isFullScreen, fullScreen }
+    return { isFullScreen, fullScreen, t }
   }
 })
 </script>

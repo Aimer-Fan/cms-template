@@ -1,5 +1,5 @@
 <template>
-  <span class="collapsed-switch-wrap" :title="collapsed ? '展开' : '关闭'" @click="changeCollapsed">
+  <span class="collapsed-switch-wrap" :title="collapsed ? t('expand') : t('close')" @click="changeCollapsed">
     <MenuUnfoldOutlined v-if="collapsed" class="icon" />
     <MenuFoldOutlined v-else class="icon" />
   </span>
@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons-vue'
 import { useStore } from '@/store'
 import { TOGGLE_COLLAPSED } from '@/store/mutation-types'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'CollapsedSwitch',
@@ -27,12 +28,13 @@ export default defineComponent({
   },
   setup () {
     const store = useStore()
+    const { t } = useI18n()
     const collapsed = computed(() => store.state.app.collapsed)
     const changeCollapsed = () => {
       const targetCollapsed = !collapsed.value
       store.dispatch(TOGGLE_COLLAPSED, targetCollapsed)
     }
-    return { collapsed, changeCollapsed }
+    return { collapsed, changeCollapsed, t }
   }
 })
 </script>
